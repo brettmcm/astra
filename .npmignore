@@ -1,0 +1,13 @@
+src
+.claude
+.git
+.gitignore
+index.html
+tsconfig.json
+tsconfig.node.json
+tsconfig.build.json
+vite.config.ts
+vite.lib.config.ts
+build
+node_modules
+*.tsbuildinfo
