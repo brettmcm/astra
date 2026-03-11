@@ -51,7 +51,7 @@ export function PromptInput({
   return (
     <div 
       className={cn(
-        'bg-white dark:bg-surface-dark box-border content-stretch flex flex-col items-start justify-between p-[24px] rounded-[24px] w-full relative transition-all duration-300',
+        'bg-surface box-border content-stretch flex flex-col items-start justify-between p-[24px] rounded-[24px] w-full relative transition-all duration-300',
         attachments.length > 0 ? 'h-[200px]' : 'h-[135px]',
         disabled && 'opacity-50 pointer-events-none',
         className

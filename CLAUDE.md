@@ -45,6 +45,8 @@ All design tokens are CSS custom properties defined in the package's CSS. They s
 #### Surface Colors
 | Token | Light | Dark |
 |---|---|---|
+| `--surface` | `#ffffff` | `#22222c` |
+| `--surface-hover` | `#f5f5f7` | `#2a2a3a` |
 | `--surface-dark` | `#22222c` | `#1a1a24` |
 | `--surface-dark-hover` | `#333341` | `#26263a` |
 | `--surface-darkest` | `#1e1e1e` | `#111118` |
@@ -78,7 +80,7 @@ bg-brand, text-brand, border-brand
 bg-brand-hover, bg-brand-dark, bg-brand-light, bg-brand-wash, bg-brand-muted
 bg-success, bg-warning, bg-danger
 text-text-primary, text-text-secondary, text-text-tertiary
-bg-surface-dark, bg-surface-dark-hover, bg-surface-darkest
+bg-surface, bg-surface-hover, bg-surface-dark, bg-surface-dark-hover, bg-surface-darkest
 border-border-subtle, border-border-medium
 bg-bg-faint, bg-bg-subtle, bg-bg-hover
 ```
@@ -210,6 +212,57 @@ Sizes: sm=32px, md=40px, lg=48px.
 | `onAttach` | `() => void` | — |
 | `disabled` | `boolean` | `false` |
 
+### InputField
+
+```tsx
+<InputField
+  label="Label"
+  description="Description"
+  value="Value"
+  placeholder="I am a placeholder..."
+  onChange={(val) => {}}
+/>
+```
+
+| Prop | Type | Default |
+|---|---|---|
+| `value` | `string` | — |
+| `placeholder` | `string` | `'I am a placeholder...'` |
+| `label` | `string` | — |
+| `description` | `string` | — |
+| `disabled` | `boolean` | `false` |
+| `className` | `string` | — |
+| `onChange` | `(value: string) => void` | — |
+
+Also accepts all native `<input>` HTML attributes (except `onChange` which uses the simplified signature above).
+
+### PromptPane
+
+```tsx
+<PromptPane
+  value={inputValue}
+  onChange={setInputValue}
+  onSend={handleSend}
+  onAttach={handleAttach}
+>
+  <ChatBubbles type="ai" text="How can I help?" />
+  <ChatBubbles type="user" text="Can you trim the first 5 seconds?" />
+</PromptPane>
+```
+
+| Prop | Type | Default |
+|---|---|---|
+| `children` | `ReactNode` | — |
+| `value` | `string` | — |
+| `placeholder` | `string` | — |
+| `onChange` | `(value: string) => void` | — |
+| `onSend` | `() => void` | — |
+| `onAttach` | `() => void` | — |
+| `disabled` | `boolean` | — |
+| `className` | `string` | — |
+
+Chat sidebar container. Pass `ChatBubbles` as children for the scrollable message area. The `PromptInput` is built in at the bottom. Prompt input props are forwarded through.
+
 ### SearchComponent
 
 ```tsx
@@ -246,10 +299,12 @@ Features animated placeholder typing through: 'anything', 'clips', 'audio'.
 
 ```tsx
 <SelectField
+  label="Label"
+  description="Description"
   options={[{ value: '1', label: 'Option 1' }, { value: '2', label: 'Option 2' }]}
   value="1"
   onSelect={(val) => {}}
-  placeholder="Select..."
+  placeholder="Select an option"
 />
 ```
 
@@ -258,11 +313,39 @@ Features animated placeholder typing through: 'anything', 'clips', 'audio'.
 | `options` | `{ value: string, label: string }[]` | required |
 | `value` | `string` | `''` |
 | `onSelect` | `(value: string) => void` | required |
-| `placeholder` | `string` | `'Select...'` |
+| `placeholder` | `string` | `'Select an option'` |
+| `label` | `string` | — |
+| `description` | `string` | — |
 | `state` | `'empty' \| 'default'` | `'default'` |
 | `disabled` | `boolean` | `false` |
+| `className` | `string` | — |
 
 Supports keyboard navigation (arrows, Enter, Escape).
+
+### TextareaField
+
+```tsx
+<TextareaField
+  label="Label"
+  description="Description"
+  value="Value"
+  placeholder="Your text goes here..."
+  onChange={(val) => {}}
+/>
+```
+
+| Prop | Type | Default |
+|---|---|---|
+| `value` | `string` | — |
+| `placeholder` | `string` | `'Your text goes here...'` |
+| `label` | `string` | — |
+| `description` | `string` | — |
+| `rows` | `number` | `3` |
+| `disabled` | `boolean` | `false` |
+| `className` | `string` | — |
+| `onChange` | `(value: string) => void` | — |
+
+Also accepts all native `<textarea>` HTML attributes (except `onChange` which uses the simplified signature above). Supports vertical resize by default (disabled when `disabled`).
 
 ### SwitchField
 

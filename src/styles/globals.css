@@ -58,6 +58,8 @@
   --danger: #cf2828;
 
   /* ── Surfaces ── */
+  --surface: #ffffff;
+  --surface-hover: #f5f5f7;
   --surface-dark: #22222c;
   --surface-dark-hover: #333341;
   --surface-darkest: #1e1e1e;
@@ -135,6 +137,8 @@
   --danger: #e04545;
 
   /* ── Surfaces (dark) ── */
+  --surface: #22222c;
+  --surface-hover: #2a2a3a;
   --surface-dark: #1a1a24;
   --surface-dark-hover: #26263a;
   --surface-darkest: #111118;
@@ -243,6 +247,8 @@
   --color-danger: var(--danger);
 
   /* ── Surfaces ── */
+  --color-surface: var(--surface);
+  --color-surface-hover: var(--surface-hover);
   --color-surface-dark: var(--surface-dark);
   --color-surface-dark-hover: var(--surface-dark-hover);
   --color-surface-darkest: var(--surface-darkest);

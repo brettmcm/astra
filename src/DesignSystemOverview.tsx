@@ -6,9 +6,12 @@ import { Badge } from './AstraLibraryKit/components/badge'
 import { Button } from './AstraLibraryKit/components/button'
 import { ChatBubbles } from './AstraLibraryKit/components/chat_bubbles'
 import { PromptInput } from './AstraLibraryKit/components/prompt_input'
+import { PromptPane } from './AstraLibraryKit/components/prompt_pane'
 import { SearchComponent } from './AstraLibraryKit/components/search_component'
 import { SegmentedControl } from './AstraLibraryKit/components/segmented_control'
+import { InputField } from './AstraLibraryKit/components/input_field'
 import { SelectField } from './AstraLibraryKit/components/select_field'
+import { TextareaField } from './AstraLibraryKit/components/textarea_field'
 import { SwitchField } from './AstraLibraryKit/components/switch_field'
 import { Toast } from './AstraLibraryKit/components/toast'
 import { VideoControl } from './AstraLibraryKit/components/video_control'
@@ -94,10 +97,13 @@ const NAV_ITEMS = [
   { id: 'avatar-group', label: 'Avatar Group' },
   { id: 'chat-bubbles', label: 'Chat Bubbles' },
   { id: 'prompt-input', label: 'Prompt Input' },
+  { id: 'prompt-pane', label: 'Prompt Pane' },
   { id: 'search', label: 'Search' },
   { id: 'segmented-control', label: 'Segmented Control' },
+  { id: 'input-field', label: 'Input Field' },
   { id: 'select-field', label: 'Select Field' },
   { id: 'switch-field', label: 'Switch Field' },
+  { id: 'textarea-field', label: 'Textarea Field' },
   { id: 'toast', label: 'Toast' },
   { id: 'video-control', label: 'Video Control' },
   { id: 'completeness', label: 'Completeness Audit' },
@@ -108,7 +114,9 @@ const NAV_ITEMS = [
 export default function DesignSystemOverview() {
   const { theme, toggleTheme } = useTheme()
   const [activeSegment, setActiveSegment] = useState('seg-1')
+  const [inputValue, setInputValue] = useState('')
   const [selectValue, setSelectValue] = useState('')
+  const [textareaValue, setTextareaValue] = useState('')
   const [switchOn, setSwitchOn] = useState(true)
   const [promptValue, setPromptValue] = useState('')
   const [searchValue, setSearchValue] = useState('')
@@ -141,12 +149,14 @@ export default function DesignSystemOverview() {
         <ul className="flex flex-col gap-0.5">
           {NAV_ITEMS.map(item => (
             <li key={item.id}>
-              <a
-                href={`#${item.id}`}
-                className="block text-[13px] text-text-secondary hover:text-brand hover:bg-brand-wash rounded-md px-2 py-1.5 transition-colors"
+              <button
+                onClick={() => {
+                  document.getElementById(item.id)?.scrollIntoView({ behavior: 'smooth' })
+                }}
+                className="block w-full text-left text-[13px] text-text-secondary hover:text-brand hover:bg-brand-wash rounded-md px-2 py-1.5 transition-colors cursor-pointer"
               >
                 {item.label}
-              </a>
+              </button>
             </li>
           ))}
         </ul>
@@ -475,6 +485,35 @@ export default function DesignSystemOverview() {
         </Section>
 
         <Section
+          id="prompt-pane"
+          title="Prompt Pane"
+          description="Chat sidebar container with a scrollable children slot for ChatBubbles and a pinned PromptInput at the bottom."
+          status="complete"
+        >
+          <ExampleRow label="With chat bubbles">
+            <div className="h-[500px] w-[400px] rounded-lg overflow-hidden border border-border-medium">
+              <PromptPane>
+                <ChatBubbles type="ai" text="How can I help?" />
+                <ChatBubbles type="user" text="Can you trim the first 5 seconds?" />
+                <ChatBubbles type="ai" text="Done! I've trimmed the first 5 seconds from your clip." />
+              </PromptPane>
+            </div>
+          </ExampleRow>
+          <ExampleRow label="Empty (no messages)">
+            <div className="h-[350px] w-[400px] rounded-lg overflow-hidden border border-border-medium">
+              <PromptPane />
+            </div>
+          </ExampleRow>
+          <div className="mt-2 bg-bg-faint border border-border-subtle rounded-lg p-4 text-[12px] text-text-secondary">
+            <p className="font-medium text-text-primary mb-1">Example uses</p>
+            <ul className="list-disc pl-4 space-y-1">
+              <li><strong>Editor sidebar:</strong> AI chat pane for issuing video edit commands and receiving responses</li>
+              <li><strong>Slot pattern:</strong> Pass <code>ChatBubbles</code> as children; <code>PromptInput</code> is built in</li>
+            </ul>
+          </div>
+        </Section>
+
+        <Section
           id="search"
           title="Search Component"
           description="Search input with animated cycling placeholder text. Dark surface treatment for toolbar use."
@@ -521,6 +560,56 @@ export default function DesignSystemOverview() {
             <ul className="list-disc pl-4 space-y-1">
               <li><strong>Timeline view toggle:</strong> Switch between storyboard, timeline, and split views</li>
               <li><strong>Preview modes:</strong> Toggle between preview, split-screen compare, and side-by-side</li>
+            </ul>
+          </div>
+        </Section>
+
+        <Section
+          id="input-field"
+          title="Input Field"
+          description="Text input with optional label and description. Matches form field pattern used by SelectField."
+          status="complete"
+        >
+          <ExampleRow label="With label & description">
+            <div className="w-[280px]">
+              <InputField
+                label="Project name"
+                description="Used as the title when exporting"
+                value={inputValue}
+                onChange={setInputValue}
+                placeholder="Enter project name..."
+              />
+            </div>
+          </ExampleRow>
+          <ExampleRow label="Empty (placeholder)">
+            <div className="w-[280px]">
+              <InputField
+                label="Tags"
+                description="Comma-separated keywords"
+                placeholder="e.g. travel, vlog, 4k"
+              />
+            </div>
+          </ExampleRow>
+          <ExampleRow label="No label / no description">
+            <div className="w-[280px]">
+              <InputField placeholder="Quick rename..." />
+            </div>
+          </ExampleRow>
+          <ExampleRow label="Disabled">
+            <div className="w-[280px]">
+              <InputField
+                label="File path"
+                description="Managed by the system"
+                value="/exports/final-cut.mp4"
+                disabled
+              />
+            </div>
+          </ExampleRow>
+          <div className="mt-2 bg-bg-faint border border-border-subtle rounded-lg p-4 text-[12px] text-text-secondary">
+            <p className="font-medium text-text-primary mb-1">Example uses</p>
+            <ul className="list-disc pl-4 space-y-1">
+              <li><strong>Project settings:</strong> Project name, description, tags</li>
+              <li><strong>Export dialog:</strong> Custom filename, output path</li>
             </ul>
           </div>
         </Section>
@@ -579,6 +668,56 @@ export default function DesignSystemOverview() {
             <ul className="list-disc pl-4 space-y-1">
               <li><strong>Settings panel:</strong> Toggle auto-save, HD preview, audio normalization</li>
               <li><strong>Share modal:</strong> "Allow comments" and "Allow downloads" toggles</li>
+            </ul>
+          </div>
+        </Section>
+
+        <Section
+          id="textarea-field"
+          title="Textarea Field"
+          description="Multi-line text input with optional label and description. Same form field pattern as InputField and SelectField."
+          status="complete"
+        >
+          <ExampleRow label="With label & description">
+            <div className="w-[320px]">
+              <TextareaField
+                label="Description"
+                description="Brief summary shown on the project card"
+                value={textareaValue}
+                onChange={setTextareaValue}
+                placeholder="Describe your project..."
+              />
+            </div>
+          </ExampleRow>
+          <ExampleRow label="Empty (placeholder)">
+            <div className="w-[320px]">
+              <TextareaField
+                label="Notes"
+                description="Internal notes, not visible to viewers"
+                placeholder="Add revision notes..."
+              />
+            </div>
+          </ExampleRow>
+          <ExampleRow label="No label / no description">
+            <div className="w-[320px]">
+              <TextareaField placeholder="Quick comment..." rows={2} />
+            </div>
+          </ExampleRow>
+          <ExampleRow label="Disabled">
+            <div className="w-[320px]">
+              <TextareaField
+                label="Transcript"
+                description="Auto-generated from audio track"
+                value="Mountain biking through the Pacific Northwest trails offers an incredible mix of terrain and scenery..."
+                disabled
+              />
+            </div>
+          </ExampleRow>
+          <div className="mt-2 bg-bg-faint border border-border-subtle rounded-lg p-4 text-[12px] text-text-secondary">
+            <p className="font-medium text-text-primary mb-1">Example uses</p>
+            <ul className="list-disc pl-4 space-y-1">
+              <li><strong>Project settings:</strong> Description, revision notes, metadata</li>
+              <li><strong>Export dialog:</strong> Custom embed code, transcript output</li>
             </ul>
           </div>
         </Section>

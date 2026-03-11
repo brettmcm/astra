@@ -1,5 +1,5 @@
 import { cn } from "./utils";
-import { useState, useRef, useEffect, ReactNode } from "react";
+import { useState, useRef, useEffect } from "react";
 
 interface SelectOption {
   value: string;
@@ -11,43 +11,39 @@ interface SelectFieldProps {
   value?: string;
   onSelect: (value: string) => void;
   placeholder?: string;
+  label?: string;
+  description?: string;
   state?: "empty" | "default";
   disabled?: boolean;
+  className?: string;
 }
 
 export function SelectField({
   options,
   value = "",
   onSelect,
-  placeholder = "Select...",
+  placeholder = "Select an option",
+  label,
+  description,
   state = "default",
   disabled = false,
+  className,
 }: SelectFieldProps) {
   const [isOpen, setIsOpen] = useState(false);
-  const [isClosing, setIsClosing] = useState(false); // exit animation flag
+  const [isClosing, setIsClosing] = useState(false);
   const [focusedIndex, setFocusedIndex] = useState(-1);
 
   const selectRef = useRef<HTMLDivElement>(null);
   const optionsRef = useRef<HTMLDivElement>(null);
   const optionNodesRef = useRef<(HTMLDivElement | null)[]>([]);
 
-  const selectedOption = options.find(
-    (option) => option.value === value,
-  );
-  const displayValue = selectedOption
-    ? selectedOption.label
-    : placeholder;
+  const selectedOption = options.find((option) => option.value === value);
+  const displayValue = selectedOption ? selectedOption.label : placeholder;
   const isEmpty = !selectedOption;
-  const currentState = isEmpty ? "empty" : state;
 
-  const MAX_VISIBLE_WHEN_EMPTY = 2;
-  const MAX_VISIBLE_WHEN_FILLED = 2;
-  const ROW_PX = 36; // approx row height
-  const maxVisible = isEmpty
-    ? MAX_VISIBLE_WHEN_EMPTY
-    : MAX_VISIBLE_WHEN_FILLED;
+  const MAX_VISIBLE = 5;
+  const ROW_PX = 36;
 
-  // ---- helpers ----
   const queueScrollIntoView = (index: number) => {
     if (index < 0) return;
     requestAnimationFrame(() => {
@@ -79,7 +75,6 @@ export function SelectField({
     return () => clearTimeout(t);
   };
 
-  // ---- outside click to close ----
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (
@@ -91,10 +86,7 @@ export function SelectField({
     };
     document.addEventListener("mousedown", handleClickOutside);
     return () =>
-      document.removeEventListener(
-        "mousedown",
-        handleClickOutside,
-      );
+      document.removeEventListener("mousedown", handleClickOutside);
   }, [isOpen]);
 
   useEffect(() => {
@@ -131,12 +123,9 @@ export function SelectField({
           });
           break;
         case "Enter":
-        case " ": // Space selects when open
+        case " ":
           event.preventDefault();
-          if (
-            focusedIndex >= 0 &&
-            focusedIndex < options.length
-          ) {
+          if (focusedIndex >= 0 && focusedIndex < options.length) {
             handleOptionClick(options[focusedIndex].value);
           }
           break;
@@ -144,8 +133,7 @@ export function SelectField({
     };
 
     document.addEventListener("keydown", handleKeyDown);
-    return () =>
-      document.removeEventListener("keydown", handleKeyDown);
+    return () => document.removeEventListener("keydown", handleKeyDown);
   }, [isOpen, focusedIndex, options, disabled]);
 
   const handleOptionClick = (optionValue: string) => {
@@ -153,90 +141,74 @@ export function SelectField({
     closeDropdown();
   };
 
-  const icon = (
-    <div className="h-[4px] relative shrink-0 w-[16px]">
-      <div className="absolute bottom-[-18.75%] left-0 right-0 top-[-18.75%]">
-        <svg
-          className="block size-full"
-          fill="none"
-          preserveAspectRatio="none"
-          viewBox="0 0 16 6"
-        >
-          <g opacity="0.5">
-            <path
-              d="M4 1L8 5L12 1"
-              stroke="currentColor"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeOpacity="0.5"
-              strokeWidth="1.5"
-            />
-          </g>
-        </svg>
-      </div>
-    </div>
-  );
-
-  const containerWidth =
-    currentState === "empty" ? "w-[255px]" : "w-[200px]";
-  const textColor =
-    currentState === "empty"
-      ? "text-text-secondary"
-      : "text-text-primary";
-
   return (
-    <div
-      className={cn("relative", containerWidth)}
-      ref={selectRef}
-    >
-      <div className="content-stretch flex flex-col gap-[16px] items-start">
+    <div className={cn("relative", className)} ref={selectRef}>
+      <div className="flex flex-col gap-1.5">
+        {label && (
+          <span className="text-body-md font-medium text-text-primary">
+            {label}
+          </span>
+        )}
+
         <div
           className={cn(
-            "bg-bg-subtle box-border content-stretch flex gap-[8px] items-center p-[12px] rounded-[8px] shrink-0 cursor-pointer transition-colors",
-            containerWidth,
-            !disabled &&
-              "hover:bg-bg-hover focus:outline-none focus:ring-2 focus:ring-brand focus:ring-offset-1",
+            "bg-bg-subtle flex items-center gap-2 rounded-lg px-3 py-2.5 cursor-pointer transition-colors",
+            !disabled && "hover:bg-bg-hover",
             disabled && "opacity-50 cursor-not-allowed",
           )}
-          onClick={() =>
-            isOpen ? closeDropdown() : openDropdown()
-          }
+          onClick={() => (isOpen ? closeDropdown() : openDropdown())}
           tabIndex={disabled ? -1 : 0}
           role="combobox"
           aria-expanded={isOpen}
           aria-haspopup="listbox"
           aria-controls={isOpen ? "select-list" : undefined}
           aria-activedescendant={
-            focusedIndex >= 0
-              ? `select-opt-${focusedIndex}`
-              : undefined
+            focusedIndex >= 0 ? `select-opt-${focusedIndex}` : undefined
           }
         >
-          <p
+          <span
             className={cn(
-              "flex-[1_0_0] font-sans font-normal min-h-px min-w-px relative shrink-0 text-body-lg whitespace-pre-wrap",
-              textColor,
+              "flex-1 font-sans text-body-md leading-[1.4]",
+              isEmpty
+                ? "text-text-secondary font-normal"
+                : "text-text-primary font-normal",
             )}
           >
             {displayValue}
-          </p>
-          <div
+          </span>
+          <svg
             className={cn(
-              "transition-transform duration-200",
+              "shrink-0 text-text-secondary transition-transform duration-200",
               isOpen && "rotate-180",
             )}
+            width="16"
+            height="16"
+            viewBox="0 0 16 16"
+            fill="none"
           >
-            {icon}
-          </div>
+            <path
+              d="M4 6L8 10L12 6"
+              stroke="currentColor"
+              strokeWidth="1.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
         </div>
+
+        {description && (
+          <span className="text-body-sm text-text-secondary">
+            {description}
+          </span>
+        )}
       </div>
+
       {(isOpen || isClosing) && !disabled && (
         <div
           ref={optionsRef}
           id="select-list"
           className={cn(
-            "absolute top-full left-0 mt-1 bg-background border border-border-medium rounded-[8px] shadow-lg z-50 overflow-y-auto",
-            containerWidth,
+            "absolute top-full left-0 right-0 mt-1 bg-surface border border-border-medium rounded-lg shadow-lg z-50 overflow-y-auto",
             "transition-[opacity,transform] duration-200",
             isClosing
               ? "opacity-0 -translate-y-1"
@@ -244,7 +216,7 @@ export function SelectField({
           )}
           role="listbox"
           style={{
-            maxHeight: `${Math.max(ROW_PX * Math.min(maxVisible, options.length), ROW_PX * 2)}px`,
+            maxHeight: `${ROW_PX * Math.min(MAX_VISIBLE, options.length)}px`,
           }}
           data-state={isClosing ? "closing" : "open"}
         >
@@ -253,7 +225,7 @@ export function SelectField({
               key={option.value}
               id={`select-opt-${index}`}
               className={cn(
-                "px-3 py-2 cursor-pointer text-body-lg font-sans transition-colors",
+                "px-3 py-2 cursor-pointer text-body-md font-sans transition-colors",
                 "hover:bg-bg-hover",
                 focusedIndex === index && "bg-bg-hover",
                 value === option.value &&
@@ -263,7 +235,9 @@ export function SelectField({
               onMouseEnter={() => setFocusedIndex(index)}
               role="option"
               aria-selected={value === option.value}
-              ref={(el) => { optionNodesRef.current[index] = el; }}
+              ref={(el) => {
+                optionNodesRef.current[index] = el;
+              }}
             >
               {option.label}
             </div>
