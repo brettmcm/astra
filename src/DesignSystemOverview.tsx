@@ -5,6 +5,7 @@ import { Avatar } from './AstraLibraryKit/components/avatar'
 import { AvatarGroup } from './AstraLibraryKit/components/avatar_group'
 import { Badge } from './AstraLibraryKit/components/badge'
 import { Button } from './AstraLibraryKit/components/button'
+import { ButtonGroup } from './AstraLibraryKit/components/button_group'
 import { ChatBubbles } from './AstraLibraryKit/components/chat_bubbles'
 import { PromptInput } from './AstraLibraryKit/components/prompt_input'
 import { PromptPane } from './AstraLibraryKit/components/prompt_pane'
@@ -17,8 +18,15 @@ import { SidebarNavigation } from './AstraLibraryKit/components/sidebar_navigati
 import { TextareaField } from './AstraLibraryKit/components/textarea_field'
 import { SwitchField } from './AstraLibraryKit/components/switch_field'
 import { Toast } from './AstraLibraryKit/components/toast'
+import { Tooltip } from './AstraLibraryKit/components/tooltip'
+import { Checkbox } from './AstraLibraryKit/components/checkbox'
+import { RadioGroup } from './AstraLibraryKit/components/radio'
+import { Modal } from './AstraLibraryKit/components/modal'
+import { Tabs } from './AstraLibraryKit/components/tabs'
+import { Toolbar } from './AstraLibraryKit/components/toolbar'
+import { ToolbarItem } from './AstraLibraryKit/components/toolbar_item'
 import { VideoControl } from './AstraLibraryKit/components/video_control'
-import { Home, Film, Book, Folder, Settings } from './AstraLibraryKit/components/icons'
+import { Home, Film, Book, Folder, Settings, MousePointer, Search, Crop, Scissors, MessageCircle } from './AstraLibraryKit/components/icons'
 
 // ─── Layout helpers ──────────────────────────────────────────────────────────
 
@@ -97,6 +105,7 @@ const NAV_ITEMS = [
   { id: 'spacing', label: 'Spacing & Radius' },
   { id: 'astra-logo', label: 'Astra Logo' },
   { id: 'button', label: 'Button' },
+  { id: 'button-group', label: 'Button Group' },
   { id: 'badge', label: 'Badge' },
   { id: 'avatar', label: 'Avatar' },
   { id: 'avatar-group', label: 'Avatar Group' },
@@ -112,6 +121,13 @@ const NAV_ITEMS = [
   { id: 'switch-field', label: 'Switch Field' },
   { id: 'textarea-field', label: 'Textarea Field' },
   { id: 'toast', label: 'Toast' },
+  { id: 'modal', label: 'Modal' },
+  { id: 'tabs', label: 'Tabs' },
+  { id: 'tooltip', label: 'Tooltip' },
+  { id: 'checkbox', label: 'Checkbox' },
+  { id: 'radio-group', label: 'Radio Group' },
+  { id: 'toolbar-item', label: 'Toolbar Item' },
+  { id: 'toolbar', label: 'Toolbar' },
   { id: 'video-control', label: 'Video Control' },
   { id: 'completeness', label: 'Completeness Audit' },
 ]
@@ -126,6 +142,8 @@ export default function DesignSystemOverview() {
   const [textareaValue, setTextareaValue] = useState('')
   const [switchOn, setSwitchOn] = useState(true)
   const [promptValue, setPromptValue] = useState('')
+  const [modalOpen, setModalOpen] = useState(false)
+  const [modalSize, setModalSize] = useState<'small' | 'medium' | 'large'>('medium')
   const [searchValue, setSearchValue] = useState('')
 
   return (
@@ -373,6 +391,62 @@ export default function DesignSystemOverview() {
             <ul className="list-disc pl-4 space-y-1">
               <li><strong>Primary:</strong> "Export" and "Share" actions in the editor toolbar</li>
               <li><strong>Neutral:</strong> Secondary actions like "Cancel" in modals or "Export" when paired with a primary Share button</li>
+            </ul>
+          </div>
+        </Section>
+
+        <Section
+          id="button-group"
+          title="Button Group"
+          description="Layout container for grouping buttons with five alignment modes. Uses the existing Button component as children."
+          status="complete"
+        >
+          <ExampleRow label="Justify (full width, space between)">
+            <div className="w-[360px]">
+              <ButtonGroup align="justify">
+                <Button variant="neutral">Cancel</Button>
+                <Button variant="primary">Save</Button>
+              </ButtonGroup>
+            </div>
+          </ExampleRow>
+          <ExampleRow label="Start">
+            <div className="w-[360px]">
+              <ButtonGroup align="start">
+                <Button variant="neutral">Cancel</Button>
+                <Button variant="primary">Save</Button>
+              </ButtonGroup>
+            </div>
+          </ExampleRow>
+          <ExampleRow label="End">
+            <div className="w-[360px]">
+              <ButtonGroup align="end">
+                <Button variant="neutral">Cancel</Button>
+                <Button variant="primary">Save</Button>
+              </ButtonGroup>
+            </div>
+          </ExampleRow>
+          <ExampleRow label="Center">
+            <div className="w-[360px]">
+              <ButtonGroup align="center">
+                <Button variant="neutral">Cancel</Button>
+                <Button variant="primary">Save</Button>
+              </ButtonGroup>
+            </div>
+          </ExampleRow>
+          <ExampleRow label="Stack (vertical, full width)">
+            <div className="w-[360px]">
+              <ButtonGroup align="stack">
+                <Button variant="neutral">Cancel</Button>
+                <Button variant="primary">Save</Button>
+              </ButtonGroup>
+            </div>
+          </ExampleRow>
+          <div className="mt-2 bg-bg-faint border border-border-secondary rounded-lg p-4 text-[12px] text-text-secondary">
+            <p className="font-medium text-text-primary mb-1">Example uses</p>
+            <ul className="list-disc pl-4 space-y-1">
+              <li><strong>Modal footer:</strong> Cancel + Save actions with justify or end alignment</li>
+              <li><strong>Mobile dialogs:</strong> Stacked full-width buttons for touch targets</li>
+              <li><strong>Form actions:</strong> Submit + secondary actions aligned to start or end</li>
             </ul>
           </div>
         </Section>
@@ -851,6 +925,68 @@ export default function DesignSystemOverview() {
         </Section>
 
         <Section
+          id="toolbar-item"
+          title="Toolbar Item"
+          description="Individual icon button used inside a Toolbar. 32×32px with an 8px corner radius. Selected state uses brand-secondary background with 85% opacity icon; default has 50% opacity icon."
+          status="complete"
+        >
+          <ExampleRow label="Default vs Selected">
+            <div className="flex items-center gap-3">
+              <ToolbarItem icon={<MousePointer size={24} strokeWidth={2} />} />
+              <ToolbarItem icon={<MousePointer size={24} strokeWidth={2} />} selected />
+            </div>
+          </ExampleRow>
+          <ExampleRow label="Various icons">
+            <div className="flex items-center gap-3">
+              <ToolbarItem icon={<Search size={24} strokeWidth={2} />} />
+              <ToolbarItem icon={<Crop size={24} strokeWidth={2} />} />
+              <ToolbarItem icon={<Scissors size={24} strokeWidth={2} />} />
+              <ToolbarItem icon={<MessageCircle size={24} strokeWidth={2} />} />
+            </div>
+          </ExampleRow>
+          <div className="mt-2 bg-bg-faint border border-border-secondary rounded-lg p-4 text-[12px] text-text-secondary">
+            <p className="font-medium text-text-primary mb-1">Example uses</p>
+            <ul className="list-disc pl-4 space-y-1">
+              <li><strong>Timeline toolbar:</strong> Individual tool actions (select, crop, cut, comment)</li>
+              <li><strong>Any icon button group:</strong> Composable inside a Toolbar container</li>
+            </ul>
+          </div>
+        </Section>
+
+        <Section
+          id="toolbar"
+          title="Toolbar"
+          description="Floating toolbar container with rounded-2xl corners, surface background, primary border, and elevated shadow. Composes ToolbarItem children with 8px gap."
+          status="complete"
+        >
+          <ExampleRow label="Default (from Figma)">
+            <Toolbar>
+              <ToolbarItem icon={<MousePointer size={24} strokeWidth={2} />} selected />
+              <ToolbarItem icon={<Search size={24} strokeWidth={2} />} />
+              <ToolbarItem icon={<Crop size={24} strokeWidth={2} />} />
+              <ToolbarItem icon={<Scissors size={24} strokeWidth={2} />} />
+              <ToolbarItem icon={<MessageCircle size={24} strokeWidth={2} />} />
+            </Toolbar>
+          </ExampleRow>
+          <ExampleRow label="Different selection">
+            <Toolbar>
+              <ToolbarItem icon={<MousePointer size={24} strokeWidth={2} />} />
+              <ToolbarItem icon={<Search size={24} strokeWidth={2} />} />
+              <ToolbarItem icon={<Crop size={24} strokeWidth={2} />} selected />
+              <ToolbarItem icon={<Scissors size={24} strokeWidth={2} />} />
+              <ToolbarItem icon={<MessageCircle size={24} strokeWidth={2} />} />
+            </Toolbar>
+          </ExampleRow>
+          <div className="mt-2 bg-bg-faint border border-border-secondary rounded-lg p-4 text-[12px] text-text-secondary">
+            <p className="font-medium text-text-primary mb-1">Example uses</p>
+            <ul className="list-disc pl-4 space-y-1">
+              <li><strong>Timeline toolbar:</strong> Floating tool palette below the video editor canvas</li>
+              <li><strong>Canvas overlay:</strong> Contextual tool options for the active editing mode</li>
+            </ul>
+          </div>
+        </Section>
+
+        <Section
           id="video-control"
           title="Video Control"
           description="Playback controls with interactive progress bar, timecode display, play/pause toggle, and settings. Supports drag-to-seek."
@@ -874,6 +1010,201 @@ export default function DesignSystemOverview() {
             <ul className="list-disc pl-4 space-y-1">
               <li><strong>Editor:</strong> Main video playback control bar below the preview canvas</li>
               <li><strong>Preview modal:</strong> Simplified playback controls in the full-screen preview overlay</li>
+            </ul>
+          </div>
+        </Section>
+
+        <Section
+          id="modal"
+          title="Modal"
+          description="Dialog overlay with scrim backdrop, title bar, scrollable content area, and optional footer. Closes on Escape key and backdrop click. Three sizes."
+          status="complete"
+        >
+          <ExampleRow label="Open modal">
+            <div className="flex items-center gap-3">
+              <Button variant="primary" size="small" onClick={() => { setModalSize('small'); setModalOpen(true); }}>Small</Button>
+              <Button variant="primary" size="small" onClick={() => { setModalSize('medium'); setModalOpen(true); }}>Medium</Button>
+              <Button variant="primary" size="small" onClick={() => { setModalSize('large'); setModalOpen(true); }}>Large</Button>
+            </div>
+          </ExampleRow>
+          <Modal
+            isOpen={modalOpen}
+            onClose={() => setModalOpen(false)}
+            title="Export settings"
+            size={modalSize}
+            footer={
+              <>
+                <Button variant="neutral" size="medium" onClick={() => setModalOpen(false)}>Cancel</Button>
+                <Button variant="primary" size="medium" onClick={() => setModalOpen(false)}>Export</Button>
+              </>
+            }
+          >
+            <p className="text-text-secondary text-label-sm">
+              Choose your export format and quality. The video will be rendered in the background and you'll receive a notification when it's ready.
+            </p>
+          </Modal>
+          <div className="mt-2 bg-bg-faint border border-border-secondary rounded-lg p-4 text-[12px] text-text-secondary">
+            <p className="font-medium text-text-primary mb-1">Example uses</p>
+            <ul className="list-disc pl-4 space-y-1">
+              <li><strong>Share dialog:</strong> Invite collaborators by email with permission controls</li>
+              <li><strong>Export settings:</strong> Configure format, resolution, and quality before export</li>
+              <li><strong>Confirmation:</strong> Destructive action confirmation before deleting a project</li>
+            </ul>
+          </div>
+        </Section>
+
+        <Section
+          id="tabs"
+          title="Tabs"
+          description="Horizontal tab bar with underline indicator. Supports controlled and uncontrolled modes with keyboard-accessible tab switching."
+          status="complete"
+        >
+          <ExampleRow label="Default">
+            <div className="w-full">
+              <Tabs
+                tabs={[
+                  { id: 'details', label: 'Details', content: <p className="text-text-secondary text-label-sm">Project name, description, and thumbnail settings.</p> },
+                  { id: 'permissions', label: 'Permissions', content: <p className="text-text-secondary text-label-sm">Manage who can view, edit, and share this project.</p> },
+                  { id: 'export', label: 'Export', content: <p className="text-text-secondary text-label-sm">Format, resolution, and quality settings for video export.</p> },
+                ]}
+                defaultTab="details"
+              />
+            </div>
+          </ExampleRow>
+          <ExampleRow label="Two tabs">
+            <div className="w-full">
+              <Tabs
+                tabs={[
+                  { id: 'comments', label: 'Comments', content: <p className="text-text-secondary text-label-sm">No comments yet. Be the first to leave feedback.</p> },
+                  { id: 'activity', label: 'Activity', content: <p className="text-text-secondary text-label-sm">Video uploaded 2 hours ago. Last edited 30 minutes ago.</p> },
+                ]}
+              />
+            </div>
+          </ExampleRow>
+          <div className="mt-2 bg-bg-faint border border-border-secondary rounded-lg p-4 text-[12px] text-text-secondary">
+            <p className="font-medium text-text-primary mb-1">Example uses</p>
+            <ul className="list-disc pl-4 space-y-1">
+              <li><strong>Project settings:</strong> Switch between Details, Permissions, and Export tabs</li>
+              <li><strong>Inspector panel:</strong> Toggle between Comments and Activity views</li>
+            </ul>
+          </div>
+        </Section>
+
+        <Section
+          id="tooltip"
+          title="Tooltip"
+          description="Contextual hint shown on hover or focus. Supports four positions with an arrow indicator and configurable show delay."
+          status="complete"
+        >
+          <ExampleRow label="Positions">
+            <div className="flex items-center gap-8 py-6">
+              <Tooltip content="Top tooltip" position="top">
+                <Button variant="neutral" size="small">Top</Button>
+              </Tooltip>
+              <Tooltip content="Bottom tooltip" position="bottom">
+                <Button variant="neutral" size="small">Bottom</Button>
+              </Tooltip>
+              <Tooltip content="Left tooltip" position="left">
+                <Button variant="neutral" size="small">Left</Button>
+              </Tooltip>
+              <Tooltip content="Right tooltip" position="right">
+                <Button variant="neutral" size="small">Right</Button>
+              </Tooltip>
+            </div>
+          </ExampleRow>
+          <ExampleRow label="With icon button">
+            <div className="py-4">
+              <Tooltip content="Settings" position="bottom">
+                <button className="p-2 rounded-lg bg-bg-subtle hover:bg-bg-hover transition-colors">
+                  <Settings className="size-5" strokeWidth={1.5} />
+                </button>
+              </Tooltip>
+            </div>
+          </ExampleRow>
+          <div className="mt-2 bg-bg-faint border border-border-secondary rounded-lg p-4 text-[12px] text-text-secondary">
+            <p className="font-medium text-text-primary mb-1">Example uses</p>
+            <ul className="list-disc pl-4 space-y-1">
+              <li><strong>Toolbar icons:</strong> Label icon-only buttons in the timeline toolbar</li>
+              <li><strong>Sidebar nav:</strong> Show page names on hover for collapsed sidebar icons</li>
+            </ul>
+          </div>
+        </Section>
+
+        <Section
+          id="checkbox"
+          title="Checkbox"
+          description="Selection control with optional label and description. Uses brand-primary for checked state with an animated checkmark."
+          status="complete"
+        >
+          <ExampleRow label="States">
+            <div className="flex flex-col gap-4">
+              <Checkbox label="Enable auto-save" description="Save changes automatically every 30 seconds" defaultChecked />
+              <Checkbox label="Show grid overlay" />
+              <Checkbox label="Normalize audio" description="Automatically adjust volume levels across clips" />
+            </div>
+          </ExampleRow>
+          <ExampleRow label="Disabled">
+            <div className="flex flex-col gap-4">
+              <Checkbox label="Managed by admin" description="This setting cannot be changed" disabled defaultChecked />
+              <Checkbox label="Unavailable" disabled />
+            </div>
+          </ExampleRow>
+          <ExampleRow label="Without label">
+            <div className="flex items-center gap-4">
+              <Checkbox defaultChecked />
+              <Checkbox />
+            </div>
+          </ExampleRow>
+          <div className="mt-2 bg-bg-faint border border-border-secondary rounded-lg p-4 text-[12px] text-text-secondary">
+            <p className="font-medium text-text-primary mb-1">Example uses</p>
+            <ul className="list-disc pl-4 space-y-1">
+              <li><strong>Settings panel:</strong> Multi-select options like export formats or notification preferences</li>
+              <li><strong>Share modal:</strong> "Allow comments", "Allow downloads" as independent toggles</li>
+            </ul>
+          </div>
+        </Section>
+
+        <Section
+          id="radio-group"
+          title="Radio Group"
+          description="Single-select group with label and optional description per option. Supports controlled and uncontrolled modes."
+          status="complete"
+        >
+          <ExampleRow label="Default">
+            <RadioGroup
+              options={[
+                { value: '720', label: '720p', description: 'Standard definition — smaller file size' },
+                { value: '1080', label: '1080p', description: 'Full HD — recommended for most exports' },
+                { value: '4k', label: '4K', description: 'Ultra HD — best quality, largest file' },
+              ]}
+              defaultValue="1080"
+            />
+          </ExampleRow>
+          <ExampleRow label="Without descriptions">
+            <RadioGroup
+              options={[
+                { value: 'mp4', label: 'MP4' },
+                { value: 'webm', label: 'WebM' },
+                { value: 'mov', label: 'MOV' },
+              ]}
+              defaultValue="mp4"
+            />
+          </ExampleRow>
+          <ExampleRow label="Disabled">
+            <RadioGroup
+              options={[
+                { value: 'free', label: 'Free', description: 'Watermarked, 720p max' },
+                { value: 'pro', label: 'Pro', description: 'No watermark, up to 4K' },
+              ]}
+              defaultValue="free"
+              disabled
+            />
+          </ExampleRow>
+          <div className="mt-2 bg-bg-faint border border-border-secondary rounded-lg p-4 text-[12px] text-text-secondary">
+            <p className="font-medium text-text-primary mb-1">Example uses</p>
+            <ul className="list-disc pl-4 space-y-1">
+              <li><strong>Export dialog:</strong> Resolution or format selection</li>
+              <li><strong>Project settings:</strong> Visibility (private / unlisted / public)</li>
             </ul>
           </div>
         </Section>

@@ -349,3 +349,62 @@ export function X({ className, size = 24, strokeWidth = 2, opacity, color }: Ico
     </svg>
   );
 }
+
+export function MousePointer({ className, size = 24, strokeWidth = 2, opacity, color }: IconProps) {
+  return (
+    <svg
+      width={size}
+      height={size}
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke={color || "currentColor"}
+      strokeWidth={strokeWidth}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className={className}
+      opacity={opacity}
+    >
+      <path d="m3 3 7.07 16.97 2.51-7.39 7.39-2.51L3 3z" />
+      <path d="m13 13 6 6" />
+    </svg>
+  );
+}
+
+export function Crop({ className, size = 24, strokeWidth = 2, opacity, color }: IconProps) {
+  return (
+    <svg
+      width={size}
+      height={size}
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke={color || "currentColor"}
+      strokeWidth={strokeWidth}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className={className}
+      opacity={opacity}
+    >
+      <path d="M6 2v14a2 2 0 0 0 2 2h14" />
+      <path d="M18 22V8a2 2 0 0 0-2-2H2" />
+    </svg>
+  );
+}
+
+export function MessageCircle({ className, size = 24, strokeWidth = 2, opacity, color }: IconProps) {
+  return (
+    <svg
+      width={size}
+      height={size}
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke={color || "currentColor"}
+      strokeWidth={strokeWidth}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className={className}
+      opacity={opacity}
+    >
+      <path d="M7.9 20A9 9 0 1 0 4 16.1L2 22z" />
+    </svg>
+  );
+}
