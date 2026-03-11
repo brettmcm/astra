@@ -46,7 +46,7 @@ export function Badge({
       variants[variant],
       className
     )}>
-      <span className="font-medium text-body-md shrink-0">
+      <span className="font-medium text-label-sm leading-none shrink-0">
         {label}
       </span>
       {removable && (

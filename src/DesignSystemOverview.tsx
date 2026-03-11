@@ -224,41 +224,36 @@ export default function DesignSystemOverview() {
         <Section
           id="typography"
           title="Typography"
-          description="Instrument Sans is the sole UI typeface. Semantic type scale tokens (text-caption through text-heading-display) with paired line-heights and custom font weights (font-book, font-semibold)."
+          description="Instrument Sans is the sole UI typeface. Semantic type scale tokens aligned to Figma (text-title, text-heading, text-label, text-input, text-video-title, text-caption) with font-book (450) and font-semibold (600) weights."
           status="complete"
         >
-          <ExampleRow label="Heading Scale">
+          <ExampleRow label="Type Scale">
             <div className="w-full">
-              <TypographySample className="font-sans text-heading-display font-book" label="Display" meta="text-heading-display / font-book / 48px/56px" />
-              <TypographySample className="font-sans text-heading-lg font-semibold" label="Large" meta="text-heading-lg / font-semibold / 24px/32px" />
-              <TypographySample className="font-sans text-heading-md font-semibold" label="Medium" meta="text-heading-md / font-semibold / 15px/25px" />
-              <TypographySample className="font-sans text-heading-sm font-semibold" label="Small" meta="text-heading-sm / font-semibold / 13px/22px" />
-            </div>
-          </ExampleRow>
-          <ExampleRow label="Body Scale">
-            <div className="w-full">
-              <TypographySample className="font-sans text-body-lg font-book" label="Body Large" meta="text-body-lg / 16px/1.4" />
-              <TypographySample className="font-sans text-body-md font-book" label="Body Medium" meta="text-body-md / 14px/1.4" />
-              <TypographySample className="font-sans text-body-md font-semibold" label="Body Medium Strong" meta="text-body-md / font-semibold" />
-              <TypographySample className="font-sans text-body-sm font-book" label="Body Small" meta="text-body-sm / 12px/1.2" />
-              <TypographySample className="font-sans text-body-xs font-book" label="Body XS" meta="text-body-xs / 10px/14px" />
-              <TypographySample className="font-sans text-caption font-book" label="Caption" meta="text-caption / 9px/14px" />
-              <TypographySample className="font-sans text-label-md font-semibold" label="Label Medium" meta="text-label-md / 14px/20px" />
+              <TypographySample className="font-display text-title font-semibold" label="Title" meta="text-title / font-display / font-semibold (600) / 24px/1.4" />
+              <TypographySample className="font-sans text-heading font-medium" label="Heading" meta="text-heading / font-medium (500) / 20px/1.4" />
+              <TypographySample className="font-sans text-caption font-semibold uppercase" label="Caption" meta="text-caption / font-semibold (600) / 20px/1.4 / uppercase" />
+              <TypographySample className="font-sans text-label font-medium" label="Label" meta="text-label / font-medium (500) / 16px/1.4" />
+              <TypographySample className="font-sans text-label-sm font-medium" label="Label Small" meta="text-label-sm / font-medium (500) / 14px/1.4" />
+              <TypographySample className="font-sans text-input font-book" label="Input" meta="text-input / font-book (450) / 16px/1.4" />
+              <TypographySample className="font-sans text-input-sm font-medium" label="Input Small" meta="text-input-sm / font-medium (500) / 14px/1.4" />
+              <TypographySample className="font-sans text-video-title font-book" label="Video Title" meta="text-video-title / font-book (450) / 12px/normal" />
             </div>
           </ExampleRow>
           <ExampleRow label="Font Weights">
             <div className="w-full flex gap-8">
-              <p className="font-sans text-body-md font-book">Book (450) <span className="text-body-xs text-text-secondary">font-book</span></p>
-              <p className="font-sans text-body-md font-semibold">Semibold (550) <span className="text-body-xs text-text-secondary">font-semibold</span></p>
+              <p className="font-sans text-label font-book">Book (450) <span className="text-video-title text-text-secondary">font-book</span></p>
+              <p className="font-sans text-label font-medium">Medium (500) <span className="text-video-title text-text-secondary">font-medium</span></p>
+              <p className="font-sans text-label font-semibold">Semibold (600) <span className="text-video-title text-text-secondary">font-semibold</span></p>
             </div>
           </ExampleRow>
-          <ExampleRow label="Primary Font">
-            <div className="w-full">
-              <p className="font-sans text-body-md">Instrument Sans <span className="text-body-xs text-text-secondary">- All UI text (via <code className="text-caption">font-sans</code> / <code className="text-caption">--font-sans</code>)</span></p>
+          <ExampleRow label="Font Families">
+            <div className="w-full flex flex-col gap-2">
+              <p className="font-display text-label">Display <span className="text-video-title text-text-secondary">- Title text (via <code className="text-video-title">font-display</code> / <code className="text-video-title">--font-display</code>)</span></p>
+              <p className="font-sans text-label">Sans <span className="text-video-title text-text-secondary">- All other UI text (via <code className="text-video-title">font-sans</code> / <code className="text-video-title">--font-sans</code>)</span></p>
             </div>
           </ExampleRow>
           <div className="mt-3 p-3 bg-emerald-50 border border-emerald-200 rounded-lg text-[12px] text-emerald-800">
-            <strong>Resolved:</strong> All components now use semantic type scale tokens (<code>text-body-sm</code>, <code>text-body-md</code>, <code>text-caption</code>, etc.) with paired line-heights via <code>@theme inline</code>. Custom font weights <code>font-book</code> (450) and <code>font-semibold</code> (550) replace all hardcoded values.
+            <strong>Resolved:</strong> Type scale realigned to match Figma type system. Tokens: <code>text-title</code> (24px), <code>text-heading</code> (20px), <code>text-caption</code> (20px/uppercase), <code>text-label</code> (16px), <code>text-label-sm</code> (14px), <code>text-input</code> (16px), <code>text-input-sm</code> (14px), <code>text-video-title</code> (12px). Font weights: <code>font-book</code> (450), <code>font-semibold</code> (600). Font families: <code>font-display</code> (titles), <code>font-sans</code> (all other text).
           </div>
         </Section>
 
@@ -325,19 +320,19 @@ export default function DesignSystemOverview() {
             <div className="flex items-end gap-6">
               <div className="flex flex-col items-center gap-2">
                 <AstraLogo size={24} />
-                <span className="text-body-xs text-text-tertiary">24</span>
+                <span className="text-video-title text-text-tertiary">24</span>
               </div>
               <div className="flex flex-col items-center gap-2">
                 <AstraLogo size={32} />
-                <span className="text-body-xs text-text-tertiary">32</span>
+                <span className="text-video-title text-text-tertiary">32</span>
               </div>
               <div className="flex flex-col items-center gap-2">
                 <AstraLogo size={48} />
-                <span className="text-body-xs text-text-tertiary">48</span>
+                <span className="text-video-title text-text-tertiary">48</span>
               </div>
               <div className="flex flex-col items-center gap-2">
                 <AstraLogo size={64} />
-                <span className="text-body-xs text-text-tertiary">64</span>
+                <span className="text-video-title text-text-tertiary">64</span>
               </div>
             </div>
           </ExampleRow>
@@ -616,11 +611,11 @@ export default function DesignSystemOverview() {
             <div className="flex items-center gap-4">
               <div className="flex flex-col items-center gap-2">
                 <SidebarButton icon={<Home className="size-full" strokeWidth={1.5} />} />
-                <span className="text-body-xs text-text-tertiary">Default</span>
+                <span className="text-video-title text-text-tertiary">Default</span>
               </div>
               <div className="flex flex-col items-center gap-2">
                 <SidebarButton icon={<Home className="size-full" strokeWidth={1.5} />} selected />
-                <span className="text-body-xs text-text-tertiary">Selected</span>
+                <span className="text-video-title text-text-tertiary">Selected</span>
               </div>
             </div>
           </ExampleRow>
@@ -922,7 +917,7 @@ export default function DesignSystemOverview() {
                 <li>Unified token layer: all components consume CSS custom properties via Tailwind utilities — zero hardcoded hex/rgba values</li>
                 <li>Token architecture: <code>:root</code> vars + <code>@theme inline</code> registration = full Tailwind class support</li>
                 <li>Dark mode: complete <code>.dark</code> overrides for all Astra tokens; ThemeProvider with localStorage persistence and system preference detection</li>
-                <li>Semantic type scale: <code>text-caption</code> through <code>text-heading-display</code> with paired line-heights; <code>font-book</code> / <code>font-semibold</code> custom weights</li>
+                <li>Semantic type scale aligned to Figma: <code>text-title</code>, <code>text-heading</code>, <code>text-label</code>, <code>text-input</code>, <code>text-video-title</code>, <code>text-caption</code>; <code>font-book</code> (450) / <code>font-semibold</code> (600) weights; <code>font-display</code> + <code>font-sans</code> families</li>
                 <li>Focus rings use <code>focus:ring-brand-primary</code> consistently across all interactive components</li>
                 <li>Components support <code>className</code> pass-through for composition</li>
                 <li>Dual ESM/CJS build with type exports</li>

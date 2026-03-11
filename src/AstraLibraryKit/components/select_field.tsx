@@ -145,7 +145,7 @@ export function SelectField({
     <div className={cn("relative", className)} ref={selectRef}>
       <div className="flex flex-col gap-1.5">
         {label && (
-          <span className="text-body-md font-medium text-text-primary">
+          <span className="text-label-sm font-medium text-text-primary">
             {label}
           </span>
         )}
@@ -168,7 +168,7 @@ export function SelectField({
         >
           <span
             className={cn(
-              "flex-1 font-sans text-body-md leading-[1.4]",
+              "flex-1 font-sans text-input-sm leading-none",
               isEmpty
                 ? "text-text-secondary font-normal"
                 : "text-text-primary font-normal",
@@ -197,7 +197,7 @@ export function SelectField({
         </div>
 
         {description && (
-          <span className="text-body-sm text-text-secondary">
+          <span className="text-video-title text-text-secondary">
             {description}
           </span>
         )}
@@ -225,7 +225,7 @@ export function SelectField({
               key={option.value}
               id={`select-opt-${index}`}
               className={cn(
-                "px-3 py-2 cursor-pointer text-body-md font-sans transition-colors",
+                "px-3 py-2 cursor-pointer text-input-sm font-sans transition-colors",
                 "hover:bg-bg-hover",
                 focusedIndex === index && "bg-bg-hover",
                 value === option.value &&

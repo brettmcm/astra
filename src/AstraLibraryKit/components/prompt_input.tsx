@@ -129,7 +129,7 @@ export function PromptInput({
         onChange={handleInputChange}
         placeholder={placeholder}
         disabled={disabled}
-        className="font-sans font-normal min-w-full relative shrink-0 text-body-md text-text-primary w-full h-full bg-transparent border-none outline-none resize-none placeholder:text-text-primary pr-[60px] pb-[40px]"
+        className="font-sans font-normal min-w-full relative shrink-0 text-input-sm text-text-primary w-full h-full bg-transparent border-none outline-none resize-none placeholder:text-text-primary pr-[60px] pb-[40px]"
 
       />
     </div>

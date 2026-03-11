@@ -23,9 +23,9 @@ export function Button({
   const baseStyles = 'inline-flex items-center justify-center gap-2 rounded-full font-sans leading-none transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-primary cursor-pointer hover:cursor-pointer'
 
   const variants = {
-    primary: 'bg-brand-primary text-white border border-brand-primary hover:bg-brand-hover disabled:opacity-40 disabled:pointer-events-none',
-    neutral: 'bg-transparent text-text-primary border border-border-primary hover:bg-bg-hover disabled:opacity-40 disabled:pointer-events-none',
-    subtle: 'bg-transparent text-brand-primary border-none hover:bg-bg-hover disabled:opacity-40 disabled:pointer-events-none'
+    primary: 'bg-brand-primary text-white border border-brand-primary hover:bg-brand-secondary hover:border-brand-secondary disabled:opacity-40 disabled:pointer-events-none',
+    neutral: 'bg-transparent text-brand-primary border border-brand-primary hover:text-brand-secondary hover:border-brand-secondary disabled:opacity-40 disabled:pointer-events-none',
+    subtle: 'bg-transparent text-brand-primary border-none hover:text-brand-secondary disabled:opacity-40 disabled:pointer-events-none'
   }
   
   const sizes = {

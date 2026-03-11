@@ -48,7 +48,7 @@ export function Avatar({
         onClick={onClick}
       >
         <div className="text-white font-medium text-center leading-none font-sans">
-          <p className="text-body-md">{initials}</p>
+          <p className="text-label-sm">{initials}</p>
         </div>
       </div>
     );

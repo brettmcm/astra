@@ -96,22 +96,22 @@ bg-modal-scrim
 
 ### Typography
 
-**Font:** `'Instrument Sans', system-ui, sans-serif`
+**Font families:**
+- `font-display` — `'Instrument Sans', system-ui, sans-serif` (titles)
+- `font-sans` — `'Instrument Sans', system-ui, sans-serif` (all other text)
 
-| Class | Size | Line Height |
-|---|---|---|
-| `text-caption` | 9px | 14px |
-| `text-body-xs` | 10px | 14px |
-| `text-body-sm` | 12px | 1.2 |
-| `text-body-md` | 14px | 1.4 |
-| `text-body-lg` | 16px | 1.4 |
-| `text-label-md` | 14px | 20px |
-| `text-heading-sm` | 13px | 22px |
-| `text-heading-md` | 15px | 25px |
-| `text-heading-lg` | 24px | 32px |
-| `text-heading-display` | 48px | 56px |
+| Class | Size | Weight | Line Height | Extra |
+|---|---|---|---|---|
+| `text-title` | 24px | 600 (SemiBold) | 1.4 | font-display |
+| `text-heading` | 20px | 500 (Medium) | 1.4 | — |
+| `text-caption` | 20px | 600 (SemiBold) | 1.4 | uppercase |
+| `text-label` | 16px | 500 (Medium) | 1.4 | — |
+| `text-label-sm` | 14px | 500 (Medium) | 1.4 | — |
+| `text-input` | 16px | 400 (Regular) | 1.4 | — |
+| `text-input-sm` | 14px | 500 (Medium) | 1.4 | — |
+| `text-video-title` | 12px | 400 (Regular) | normal | — |
 
-**Font weights:** `font-book` (450), `font-medium` (500), `font-semibold` (550)
+**Font weights:** `font-book` (450), `font-medium` (500), `font-semibold` (600)
 
 ## Components
 

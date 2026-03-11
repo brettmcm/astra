@@ -45,7 +45,7 @@ export function ChatBubbles({ type = 'ai', text, userAvatar, className }: ChatBu
               <div className="size-full">
                 <div className="box-border content-stretch flex gap-[12px] items-start px-[16px] py-[12px] relative w-full">
                   <div className="content-stretch flex flex-[1_0_0] flex-col gap-[10px] items-center justify-center min-h-px min-w-px relative shrink-0">
-                    <p className="font-sans font-normal relative shrink-0 text-body-sm text-text-primary w-full whitespace-pre-wrap">
+                    <p className="font-sans font-normal relative shrink-0 text-video-title text-text-primary w-full whitespace-pre-wrap">
                       {text}
                     </p>
                   </div>
@@ -74,7 +74,7 @@ export function ChatBubbles({ type = 'ai', text, userAvatar, className }: ChatBu
         <div className="bg-brand-secondary box-border content-stretch flex gap-[12px] items-start px-[16px] py-[12px] relative rounded-[8px] shrink-0 w-[212px]">
           <div aria-hidden="true" className="absolute border border-border-secondary border-solid inset-0 pointer-events-none rounded-[8px]" />
           <div className="content-stretch flex flex-[1_0_0] gap-[10px] items-center justify-center min-h-px min-w-px relative shrink-0">
-            <p className="flex-[1_0_0] font-sans font-normal min-h-px min-w-px relative shrink-0 text-body-sm text-text-primary whitespace-pre-wrap">
+            <p className="flex-[1_0_0] font-sans font-normal min-h-px min-w-px relative shrink-0 text-video-title text-text-primary whitespace-pre-wrap">
               {text}
             </p>
           </div>

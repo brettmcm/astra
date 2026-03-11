@@ -30,7 +30,7 @@ export function TextareaField({
       <div className="flex flex-col gap-1.5">
         {label && (
           <label
-            className="text-body-md font-medium text-text-primary cursor-pointer"
+            className="text-label-sm font-medium text-text-primary cursor-pointer"
             onClick={() => textareaRef.current?.focus()}
           >
             {label}
@@ -45,7 +45,7 @@ export function TextareaField({
           rows={rows}
           onChange={(e) => onChange?.(e.target.value)}
           className={cn(
-            "bg-bg-subtle w-full rounded-lg px-3 py-2.5 font-sans text-body-md leading-[1.4] font-normal text-text-primary transition-colors resize-vertical",
+            "bg-bg-subtle w-full rounded-lg px-3 py-2.5 font-sans text-input-sm font-normal text-text-primary transition-colors resize-vertical",
             "placeholder:text-text-secondary",
             "outline-none border-none",
             "focus:bg-bg-hover",
@@ -56,7 +56,7 @@ export function TextareaField({
         />
 
         {description && (
-          <span className="text-body-sm text-text-secondary">
+          <span className="text-video-title text-text-secondary">
             {description}
           </span>
         )}

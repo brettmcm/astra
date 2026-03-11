@@ -70,7 +70,7 @@ export function SearchComponent({
           onKeyDown={handleKeyDown}
           placeholder={value ? placeholder : animatedPlaceholder}
           disabled={disabled}
-          className="bg-transparent font-sans font-normal opacity-70 text-body-md text-text-primary placeholder:opacity-70 border-none outline-none w-full"
+          className="bg-transparent font-sans font-normal opacity-70 text-input-sm text-text-primary placeholder:opacity-70 border-none outline-none w-full"
 
           {...props}
         />

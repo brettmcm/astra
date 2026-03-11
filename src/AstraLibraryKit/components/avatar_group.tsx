@@ -57,9 +57,9 @@ function OverflowIndicator({
   onClick?: () => void 
 }) {
   const sizeStyles = {
-    sm: 'size-[20px] text-body-xs',
-    md: 'size-[24px] text-body-md',
-    lg: 'size-[28px] text-body-lg'
+    sm: 'size-[20px] text-[10px]',
+    md: 'size-[24px] text-label-sm',
+    lg: 'size-[28px] text-label'
   };
 
   return (
