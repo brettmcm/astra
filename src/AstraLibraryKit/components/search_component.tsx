@@ -61,8 +61,8 @@ export function SearchComponent({
   };
 
   return (
-    <div className={cn('content-stretch flex gap-[8px] items-center', className)}>
-      <div className="bg-bg-subtle box-border content-stretch flex gap-[4px] h-[40px] items-center px-[20px] py-[12px] relative rounded-[64px] shrink-0 w-[177px] focus-within:ring-2 focus-within:ring-white/20 transition-all">
+    <div className={cn('content-stretch flex gap-[8px] items-center w-full', className)}>
+      <div className="bg-bg-subtle box-border content-stretch flex gap-[4px] h-[40px] items-center px-[20px] py-[12px] relative rounded-[64px] w-full focus-within:ring-2 focus-within:ring-white/20 transition-all">
         <input
           type="text"
           value={value}
