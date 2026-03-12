@@ -7,6 +7,9 @@ import { Badge } from './AstraLibraryKit/components/badge'
 import { Button } from './AstraLibraryKit/components/button'
 import { ButtonGroup } from './AstraLibraryKit/components/button_group'
 import { ChatBubbles } from './AstraLibraryKit/components/chat_bubbles'
+import { DurationBadge } from './AstraLibraryKit/components/duration_badge'
+import { ItemCard } from './AstraLibraryKit/components/item_card'
+import { FavoriteButton } from './AstraLibraryKit/components/favorite_button'
 import { PromptInput } from './AstraLibraryKit/components/prompt_input'
 import { PromptPane } from './AstraLibraryKit/components/prompt_pane'
 import { SearchComponent } from './AstraLibraryKit/components/search_component'
@@ -107,6 +110,9 @@ const NAV_ITEMS = [
   { id: 'button', label: 'Button' },
   { id: 'button-group', label: 'Button Group' },
   { id: 'badge', label: 'Badge' },
+  { id: 'duration-badge', label: 'Duration Badge' },
+  { id: 'favorite-button', label: 'Favorite Button' },
+  { id: 'item-card', label: 'Item Card' },
   { id: 'avatar', label: 'Avatar' },
   { id: 'avatar-group', label: 'Avatar Group' },
   { id: 'chat-bubbles', label: 'Chat Bubbles' },
@@ -474,6 +480,134 @@ export default function DesignSystemOverview() {
             <ul className="list-disc pl-4 space-y-1">
               <li><strong>Success/Warning/Danger:</strong> Export status indicators (completed, processing, failed)</li>
               <li><strong>Removable Default:</strong> Applied filters in the asset library search</li>
+            </ul>
+          </div>
+        </Section>
+
+        <Section
+          id="duration-badge"
+          title="Duration Badge"
+          description="Compact timecode label with semi-transparent background. Designed to overlay video thumbnails or sit inline with metadata."
+          status="complete"
+        >
+          <ExampleRow label="Timecodes">
+            <DurationBadge duration="0:01:30" />
+            <DurationBadge duration="0:00:15" />
+            <DurationBadge duration="1:24:07" />
+          </ExampleRow>
+          <ExampleRow label="On dark surface">
+            <div className="flex items-center gap-3 bg-surface-dark rounded-lg p-4">
+              <DurationBadge duration="0:04:22" />
+              <DurationBadge duration="0:30:00" />
+            </div>
+          </ExampleRow>
+          <div className="mt-2 bg-bg-faint border border-border-secondary rounded-lg p-4 text-[12px] text-text-secondary">
+            <p className="font-medium text-text-primary mb-1">Example uses</p>
+            <ul className="list-disc pl-4 space-y-1">
+              <li><strong>Video thumbnail:</strong> Overlaid in the bottom-right corner to show clip length</li>
+              <li><strong>Timeline:</strong> Inline timecode labels next to clips or markers</li>
+            </ul>
+          </div>
+        </Section>
+
+        <Section
+          id="favorite-button"
+          title="Favorite Button"
+          description="24px circular toggle button with a star icon. Surface background with stroked star when inactive, filled brand-primary star when active. Adapts to dark mode via surface-bg token."
+          status="complete"
+        >
+          <ExampleRow label="Default vs Favorited">
+            <div className="flex items-center gap-4">
+              <FavoriteButton />
+              <FavoriteButton defaultFavorited />
+            </div>
+          </ExampleRow>
+          <ExampleRow label="On thumbnail">
+            <div className="flex items-center gap-4 rounded-lg p-4 bg-cover bg-center" style={{ backgroundImage: 'linear-gradient(168deg, rgb(26, 58, 42) 8%, rgb(45, 90, 58) 42%, rgb(74, 122, 74) 92%)' }}>
+              <FavoriteButton />
+              <FavoriteButton defaultFavorited />
+            </div>
+          </ExampleRow>
+          <ExampleRow label="Dark mode">
+            <div className="dark bg-surface-darkest rounded-lg p-4 flex items-center gap-4">
+              <FavoriteButton />
+              <FavoriteButton defaultFavorited />
+            </div>
+          </ExampleRow>
+          <ExampleRow label="Dark mode on thumbnail">
+            <div className="dark rounded-lg p-4 flex items-center gap-4 bg-cover bg-center" style={{ backgroundImage: 'linear-gradient(168deg, rgb(26, 58, 42) 8%, rgb(45, 90, 58) 42%, rgb(74, 122, 74) 92%)' }}>
+              <FavoriteButton />
+              <FavoriteButton defaultFavorited />
+            </div>
+          </ExampleRow>
+          <div className="mt-2 bg-bg-faint border border-border-secondary rounded-lg p-4 text-[12px] text-text-secondary">
+            <p className="font-medium text-text-primary mb-1">Example uses</p>
+            <ul className="list-disc pl-4 space-y-1">
+              <li><strong>Video thumbnail:</strong> Overlaid in the top-right corner for quick bookmarking</li>
+              <li><strong>Project card:</strong> Inline favorite toggle next to the project title</li>
+            </ul>
+          </div>
+        </Section>
+
+        <Section
+          id="item-card"
+          title="Item Card"
+          description="Content card with a media area (gradient or thumbnail), duration badge overlay, title, and metadata row with dot separator. 305px default width."
+          status="complete"
+        >
+          <ExampleRow label="Default (gradient)">
+            <ItemCard
+              title="Mountain biking"
+              updated="Edited 2m ago"
+              spec="4K"
+              duration="0:01:30"
+            />
+          </ExampleRow>
+          <ExampleRow label="With thumbnail image">
+            <ItemCard
+              title="Forest trail ride"
+              updated="Edited 1h ago"
+              spec="1080p"
+              duration="0:04:22"
+              thumbnail={
+                <img
+                  src="https://images.unsplash.com/photo-1604677657548-4ced0c4f40c6?w=632&h=354&fit=crop"
+                  alt="Forest trail"
+                  className="size-full object-cover"
+                />
+              }
+            />
+          </ExampleRow>
+          <ExampleRow label="Dark mode">
+            <div className="dark bg-surface-darkest rounded-xl p-6">
+              <div className="flex gap-4">
+                <ItemCard
+                  title="Mountain biking"
+                  updated="Edited 2m ago"
+                  spec="4K"
+                  duration="0:01:30"
+                />
+                <ItemCard
+                  title="Sunset canyon"
+                  updated="Edited 5m ago"
+                  spec="1080p"
+                  duration="0:12:45"
+                  thumbnail={
+                    <img
+                      src="https://images.unsplash.com/photo-1553105659-d918b253f0f2?w=632&h=354&fit=crop"
+                      alt="Sunset canyon"
+                      className="size-full object-cover"
+                    />
+                  }
+                />
+              </div>
+            </div>
+          </ExampleRow>
+          <div className="mt-2 bg-bg-faint border border-border-secondary rounded-lg p-4 text-[12px] text-text-secondary">
+            <p className="font-medium text-text-primary mb-1">Example uses</p>
+            <ul className="list-disc pl-4 space-y-1">
+              <li><strong>Project grid:</strong> Video project cards in the home/library view</li>
+              <li><strong>Recent items:</strong> Recently edited project cards in the dashboard</li>
             </ul>
           </div>
         </Section>
