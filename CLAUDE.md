@@ -242,6 +242,8 @@ Sizes: sm=32px, md=40px, lg=48px.
   description="Description"
   value="Value"
   placeholder="I am a placeholder..."
+  prefix={<Search size={16} />}
+  suffix="USD"
   onChange={(val) => {}}
 />
 ```
@@ -252,11 +254,13 @@ Sizes: sm=32px, md=40px, lg=48px.
 | `placeholder` | `string` | `'I am a placeholder...'` |
 | `label` | `string` | — |
 | `description` | `string` | — |
+| `prefix` | `ReactNode` | — |
+| `suffix` | `ReactNode` | — |
 | `disabled` | `boolean` | `false` |
 | `className` | `string` | — |
 | `onChange` | `(value: string) => void` | — |
 
-Also accepts all native `<input>` HTML attributes (except `onChange` which uses the simplified signature above).
+Also accepts all native `<input>` HTML attributes (except `onChange` which uses the simplified signature above). `prefix` and `suffix` render inside the input container — use for icons, units, or short labels.
 
 ### PromptPane
 
@@ -418,6 +422,31 @@ Also accepts all native `<textarea>` HTML attributes (except `onChange` which us
 | `onChange` | `(selected: boolean) => void` | — |
 | `disabled` | `boolean` | `false` |
 
+### RadioGroup
+
+```tsx
+<RadioGroup
+  options={[
+    { value: 'opt1', label: 'Option 1', description: 'First option' },
+    { value: 'opt2', label: 'Option 2' },
+  ]}
+  value="opt1"
+  onChange={(val) => {}}
+/>
+```
+
+| Prop | Type | Default |
+|---|---|---|
+| `options` | `{ value: string, label: string, description?: string }[]` | required |
+| `value` | `string` | — |
+| `defaultValue` | `string` | `''` |
+| `onChange` | `(value: string) => void` | — |
+| `name` | `string` | — |
+| `disabled` | `boolean` | `false` |
+| `className` | `string` | — |
+
+Supports controlled (`value`) and uncontrolled (`defaultValue`) modes. Each option can have an optional `description` displayed below the label.
+
 ### Toast
 
 ```tsx
@@ -459,6 +488,30 @@ Auto-loops a progress animation when `progress <= 0`.
 | `onSettings` | `() => void` | — |
 | `onBackward` | `() => void` | — |
 | `onForward` | `() => void` | — |
+
+### ThemeProvider
+
+```tsx
+import { ThemeProvider, useTheme } from '@brettmcm/astraui'
+
+// Wrap your app root
+<ThemeProvider>
+  <App />
+</ThemeProvider>
+
+// Use the hook in any child component
+function ThemeToggle() {
+  const { theme, toggleTheme, setTheme } = useTheme()
+  return <Button onClick={toggleTheme}>{theme}</Button>
+}
+```
+
+| Export | Type | Description |
+|---|---|---|
+| `ThemeProvider` | Component | Wrap at app root. Manages `.dark` class on `<html>` and persists to `localStorage`. |
+| `useTheme()` | Hook | Returns `{ theme, toggleTheme, setTheme }` |
+
+Reads `localStorage('astra-theme')` on mount, falls back to `prefers-color-scheme`. Must be an ancestor of any component calling `useTheme()`.
 
 ## Icons
 

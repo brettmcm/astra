@@ -127,6 +127,8 @@ Sizes: sm=32px, md=40px, lg=48px.
   description="Description"
   value="Value"
   placeholder="I am a placeholder..."
+  prefix={<Search size={16} />}
+  suffix="USD"
   onChange={(val) => {}}
 />
 ```
@@ -137,11 +139,13 @@ Sizes: sm=32px, md=40px, lg=48px.
 | `placeholder` | `string` | `'I am a placeholder...'` |
 | `label` | `string` | — |
 | `description` | `string` | — |
+| `prefix` | `ReactNode` | — |
+| `suffix` | `ReactNode` | — |
 | `disabled` | `boolean` | `false` |
 | `className` | `string` | — |
 | `onChange` | `(value: string) => void` | — |
 
-Also accepts all native `<input>` HTML attributes (except `onChange` which uses the simplified signature above).
+Also accepts all native `<input>` HTML attributes (except `onChange` which uses the simplified signature above). `prefix` and `suffix` render inside the input container — use for icons, units, or short labels.
 
 ## PromptPane
 
@@ -542,6 +546,30 @@ Floating toolbar container. 48px height, 16px border radius, `surface-bg` backgr
 | `className` | `string` | — |
 
 32px icon button with 8px border radius. Default state: 50% opacity icon, no background. Selected state: `brand-secondary` background, 85% opacity icon. Also accepts all native `<button>` HTML attributes.
+
+## ThemeProvider
+
+```tsx
+import { ThemeProvider, useTheme } from '@brettmcm/astraui'
+
+// Wrap your app root
+<ThemeProvider>
+  <App />
+</ThemeProvider>
+
+// Use the hook in any child component
+function ThemeToggle() {
+  const { theme, toggleTheme, setTheme } = useTheme()
+  return <Button onClick={toggleTheme}>{theme}</Button>
+}
+```
+
+| Export | Type | Description |
+|---|---|---|
+| `ThemeProvider` | Component | Wrap at app root. Manages `.dark` class on `<html>` and persists to `localStorage`. |
+| `useTheme()` | Hook | Returns `{ theme, toggleTheme, setTheme }` |
+
+Reads `localStorage('astra-theme')` on mount, falls back to `prefers-color-scheme`. Must be an ancestor of any component calling `useTheme()`.
 
 ## Tooltip
 

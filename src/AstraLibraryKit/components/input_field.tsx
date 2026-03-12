@@ -1,12 +1,14 @@
 import { cn } from "./utils";
-import { useRef, type InputHTMLAttributes } from "react";
+import { useRef, type InputHTMLAttributes, type ReactNode } from "react";
 
 interface InputFieldProps
-  extends Omit<InputHTMLAttributes<HTMLInputElement>, "onChange"> {
+  extends Omit<InputHTMLAttributes<HTMLInputElement>, "onChange" | "prefix" | "suffix"> {
   value?: string;
   placeholder?: string;
   label?: string;
   description?: string;
+  prefix?: ReactNode;
+  suffix?: ReactNode;
   disabled?: boolean;
   className?: string;
   onChange?: (value: string) => void;
@@ -17,6 +19,8 @@ export function InputField({
   placeholder = "I am a placeholder...",
   label,
   description,
+  prefix,
+  suffix,
   disabled = false,
   className,
   onChange,
@@ -36,23 +40,36 @@ export function InputField({
           </label>
         )}
 
-        <input
-          ref={inputRef}
-          type="text"
-          value={value}
-          placeholder={placeholder}
-          disabled={disabled}
-          onChange={(e) => onChange?.(e.target.value)}
+        <div
           className={cn(
-            "bg-bg-subtle w-full rounded-lg px-3 py-2.5 font-sans text-input-sm leading-none font-normal text-text-primary transition-colors",
-            "placeholder:text-text-secondary",
-            "outline-none border-none",
-            "focus:bg-bg-hover",
+            "flex items-center gap-2 bg-bg-subtle w-full rounded-lg px-3 py-2.5 transition-colors",
+            "has-[:focus]:bg-bg-hover",
             !disabled && "hover:bg-bg-hover",
             disabled && "opacity-50 cursor-not-allowed",
           )}
-          {...rest}
-        />
+          onClick={() => inputRef.current?.focus()}
+        >
+          {prefix && (
+            <span className="shrink-0 text-text-secondary">{prefix}</span>
+          )}
+          <input
+            ref={inputRef}
+            type="text"
+            value={value}
+            placeholder={placeholder}
+            disabled={disabled}
+            onChange={(e) => onChange?.(e.target.value)}
+            className={cn(
+              "bg-transparent w-full font-sans text-input-sm leading-none font-normal text-text-primary",
+              "placeholder:text-text-secondary",
+              "outline-none border-none",
+            )}
+            {...rest}
+          />
+          {suffix && (
+            <span className="shrink-0 text-text-secondary">{suffix}</span>
+          )}
+        </div>
 
         {description && (
           <span className="text-video-title text-text-secondary">

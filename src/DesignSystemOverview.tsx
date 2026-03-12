@@ -908,6 +908,24 @@ export default function DesignSystemOverview() {
               <InputField placeholder="Quick rename..." />
             </div>
           </ExampleRow>
+          <ExampleRow label="With prefix">
+            <div className="w-[280px]">
+              <InputField
+                label="Search"
+                prefix={<Search size={16} />}
+                placeholder="Find clips..."
+              />
+            </div>
+          </ExampleRow>
+          <ExampleRow label="With suffix">
+            <div className="w-[280px]">
+              <InputField
+                label="Duration"
+                suffix="sec"
+                placeholder="0"
+              />
+            </div>
+          </ExampleRow>
           <ExampleRow label="Disabled">
             <div className="w-[280px]">
               <InputField
@@ -923,6 +941,8 @@ export default function DesignSystemOverview() {
             <ul className="list-disc pl-4 space-y-1">
               <li><strong>Project settings:</strong> Project name, description, tags</li>
               <li><strong>Export dialog:</strong> Custom filename, output path</li>
+              <li><strong>Search inputs:</strong> Use <code>prefix</code> for a search icon</li>
+              <li><strong>Unit inputs:</strong> Use <code>suffix</code> for units like "sec", "px", "USD"</li>
             </ul>
           </div>
         </Section>
