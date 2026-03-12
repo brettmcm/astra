@@ -108,15 +108,40 @@ Borders should communicate interactivity or containment within a component — n
 - Secondary panes (chat, inspectors) sit between the sidebar and the main workspace.
 - **Never build a desktop page without `SidebarNavigation`.** If you're unsure whether to include it, include it.
 
-### Layout structure (left to right)
+### Navigation hierarchy
+
+Astra has three levels of navigation. Use them in order — never skip a level.
+
+| Level | Component | Purpose |
+|---|---|---|
+| **Primary** | `SidebarNavigation` + `SidebarButton` | App-level navigation (Home, Film, Book, Folder). Always present on every page. |
+| **Secondary** | `SecondaryNav` + `SecondaryNavItem` | Section-level navigation within a page (e.g. Settings > Profile, Billing, Notifications, Media). Used when a page has multiple sub-sections. |
+| **Tertiary** | `Tabs` | Content-level navigation within the main content area (e.g. switching views or filters within a single section). Only used inside the main content panel. |
+
+**Rules:**
+- `Tabs` should ONLY be used as tertiary navigation within the main content area. Never use `Tabs` for primary or secondary navigation.
+- If a page has sub-sections (like Settings), use `SecondaryNav` as secondary navigation — not `Tabs`.
+- `Tabs` are for switching views or filtering content within a single section that already has its own `SecondaryNavItem` selected.
+
+### Layout patterns
+
+**Simple page (no secondary nav):**
 
 ```
-[ SidebarNavigation 60px ] [ Main content area (flex) ]
+[ SidebarNavigation 60px ] [ Main content (flex) ]
   surface-dark                 brand-tertiary background
                                └── surface-bg cards/panels float on top
 ```
 
-### Standard navigation items
+**Page with secondary nav (standard for settings, detail views):**
+
+```
+[ SidebarNavigation 60px ] [ SecondaryNav ~252px ] [ Main content (flex) ]
+  surface-dark                surface-secondary-bg    brand-tertiary background
+                              border-right            └── surface-bg cards/panels float on top
+```
+
+### Standard sidebar items
 
 The sidebar always has the same four primary nav items and two footer items. Set `selected` on the item matching the current page.
 
@@ -135,8 +160,18 @@ The sidebar always has the same four primary nav items and two footer items. Set
     <SidebarButton icon={<Book className="size-full" strokeWidth={1.5} />} />
     <SidebarButton icon={<Folder className="size-full" strokeWidth={1.5} />} />
   </SidebarNavigation>
+
+  {/* Optional: secondary nav for pages with sub-sections */}
+  <SecondaryNav title="Settings">
+    <SecondaryNavItem icon={<User className="size-full" strokeWidth={1.5} />} label="Profile" active />
+    <SecondaryNavItem icon={<CreditCard className="size-full" strokeWidth={1.5} />} label="Billing" />
+    <SecondaryNavItem icon={<Bell className="size-full" strokeWidth={1.5} />} label="Notifications" />
+    <SecondaryNavItem icon={<Video className="size-full" strokeWidth={1.5} />} label="Media" />
+  </SecondaryNav>
+
   <main className="flex-1 bg-brand-tertiary">
     {/* surface-bg cards and panels float on the branded canvas */}
+    {/* Tabs go HERE if needed — as tertiary nav within this content area */}
   </main>
 </div>
 ```
@@ -163,11 +198,12 @@ Brand color should be used with restraint. Most of the screen should be neutral.
 - Selected toolbar item backgrounds (built into the component)
 - **Do not use as a background for cards, rows, panels, or large sections**
 
-### brand-tertiary — secondary pane background only
+### brand-tertiary — the page background canvas
 
-- The secondary left-column pane (chat sidebar, inspector, settings panel)
-- **This is the only large branded surface in the layout**
-- Do not apply it to cards, content areas, or multiple panels
+- **This is the primary background color for all page content areas** — the main content wrapper next to `SidebarNavigation` always uses `bg-brand-tertiary`.
+- Content cards, panels, and form containers use `surface-bg` and float on top of this branded canvas.
+- This subtle lavender (#eaeaff) is what makes every screen feel like Astra.
+- **Every page must have `brand-tertiary` as its background** — never use plain white or gray as the page background.
 
 ### Don't
 

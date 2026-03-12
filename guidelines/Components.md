@@ -111,10 +111,10 @@ Sizes: sm=32px, md=40px, lg=48px.
 | `text` | `string` | required |
 | `userAvatar` | `ReactNode` | — |
 
-## NavListItem
+## SecondaryNavItem
 
 ```tsx
-<NavListItem
+<SecondaryNavItem
   icon={<Home className="size-full" strokeWidth={1.5} />}
   label="Profile"
   active
@@ -130,15 +130,15 @@ Sizes: sm=32px, md=40px, lg=48px.
 
 Also accepts all native `<button>` HTML attributes. Active state uses `brand-tertiary` background with `brand-primary` text. Inactive state shows `text-secondary` with hover to `bg-hover`.
 
-## NavList
+## SecondaryNav
 
 ```tsx
-<NavList title="Settings">
-  <NavListItem icon={<Home className="size-full" strokeWidth={1.5} />} label="Profile" active />
-  <NavListItem icon={<Film className="size-full" strokeWidth={1.5} />} label="Billing" />
-  <NavListItem icon={<Book className="size-full" strokeWidth={1.5} />} label="Notifications" />
-  <NavListItem icon={<Folder className="size-full" strokeWidth={1.5} />} label="Media" />
-</NavList>
+<SecondaryNav title="Settings">
+  <SecondaryNavItem icon={<Home className="size-full" strokeWidth={1.5} />} label="Profile" active />
+  <SecondaryNavItem icon={<Film className="size-full" strokeWidth={1.5} />} label="Billing" />
+  <SecondaryNavItem icon={<Book className="size-full" strokeWidth={1.5} />} label="Notifications" />
+  <SecondaryNavItem icon={<Folder className="size-full" strokeWidth={1.5} />} label="Media" />
+</SecondaryNav>
 ```
 
 | Prop | Type | Default |
@@ -147,7 +147,9 @@ Also accepts all native `<button>` HTML attributes. Active state uses `brand-ter
 | `children` | `ReactNode` | required |
 | `className` | `string` | — |
 
-Vertical navigation panel with heading and `NavListItem` children. Uses `surface-secondary-bg` background with a right `border-primary` border. 252px default width, full height. Used for secondary navigation within settings or detail views.
+Vertical navigation panel with heading and `SecondaryNavItem` children. Uses `surface-secondary-bg` background with a right `border-primary` border. 252px default width, full height. Used for secondary navigation within settings or detail views.
+
+**Layout rule:** `SecondaryNav` is the standard **secondary navigation** for pages with sub-sections. It sits between `SidebarNavigation` and the main content area. The standard layout is: `SidebarNavigation (60px)` → `SecondaryNav (~252px)` → `Main content (flex, bg-brand-tertiary)`. Use this pattern for settings, account pages, and any page with multiple sub-sections.
 
 ## PromptInput
 
@@ -575,6 +577,8 @@ Single-select group with label and optional description per option. Supports con
 | `className` | `string` | — |
 
 Horizontal tab bar with `brand-primary` underline indicator and panel switching. Active tab uses `text-brand-primary`, inactive uses `text-text-secondary` with hover to `text-text-primary`. Uses `role="tablist"`, `role="tab"` with `aria-selected`, and `role="tabpanel"` for accessibility.
+
+**Layout rule:** Tabs are **tertiary navigation only** — used inside the main content area to switch views or filter content within a single section. Do NOT use Tabs for primary navigation (use `SidebarNavigation`) or secondary navigation (use `SecondaryNav`). If a page has sub-sections like Settings, those are `SecondaryNavItem`s in a `SecondaryNav`, not Tabs.
 
 ## Toolbar
 

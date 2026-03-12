@@ -1,17 +1,17 @@
 import { cn } from "./utils";
 import { type ReactNode } from "react";
 
-interface NavListProps {
+interface SecondaryNavProps {
   title: string;
   children: ReactNode;
   className?: string;
 }
 
-export function NavList({
+export function SecondaryNav({
   title,
   children,
   className,
-}: NavListProps) {
+}: SecondaryNavProps) {
   return (
     <nav
       className={cn(

@@ -24,8 +24,8 @@ import {
   InputField,
   ItemCard,
   Modal,
-  NavList,
-  NavListItem,
+  SecondaryNav,
+  SecondaryNavItem,
   PromptInput,
   PromptPane,
   RadioGroup,
@@ -265,10 +265,10 @@ Sizes: sm=32px, md=40px, lg=48px.
 | `text` | `string` | required |
 | `userAvatar` | `ReactNode` | — |
 
-### NavListItem
+### SecondaryNavItem
 
 ```tsx
-<NavListItem
+<SecondaryNavItem
   icon={<Home className="size-full" strokeWidth={1.5} />}
   label="Profile"
   active
@@ -284,15 +284,15 @@ Sizes: sm=32px, md=40px, lg=48px.
 
 Also accepts all native `<button>` HTML attributes. Active state uses `brand-tertiary` background with `brand-primary` text. Inactive state shows `text-secondary` with hover to `bg-hover`.
 
-### NavList
+### SecondaryNav
 
 ```tsx
-<NavList title="Settings">
-  <NavListItem icon={<Home className="size-full" strokeWidth={1.5} />} label="Profile" active />
-  <NavListItem icon={<Film className="size-full" strokeWidth={1.5} />} label="Billing" />
-  <NavListItem icon={<Book className="size-full" strokeWidth={1.5} />} label="Notifications" />
-  <NavListItem icon={<Folder className="size-full" strokeWidth={1.5} />} label="Media" />
-</NavList>
+<SecondaryNav title="Settings">
+  <SecondaryNavItem icon={<Home className="size-full" strokeWidth={1.5} />} label="Profile" active />
+  <SecondaryNavItem icon={<Film className="size-full" strokeWidth={1.5} />} label="Billing" />
+  <SecondaryNavItem icon={<Book className="size-full" strokeWidth={1.5} />} label="Notifications" />
+  <SecondaryNavItem icon={<Folder className="size-full" strokeWidth={1.5} />} label="Media" />
+</SecondaryNav>
 ```
 
 | Prop | Type | Default |
@@ -301,7 +301,7 @@ Also accepts all native `<button>` HTML attributes. Active state uses `brand-ter
 | `children` | `ReactNode` | required |
 | `className` | `string` | — |
 
-Vertical navigation panel with heading and `NavListItem` children. Uses `surface-secondary-bg` background with a right `border-primary` border. 252px default width, full height. Used for secondary navigation within settings or detail views.
+Vertical navigation panel with heading and `SecondaryNavItem` children. Uses `surface-secondary-bg` background with a right `border-primary` border. 252px default width, full height. Used for secondary navigation within settings or detail views.
 
 ### PromptInput
 

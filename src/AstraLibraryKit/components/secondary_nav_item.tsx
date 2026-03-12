@@ -1,7 +1,7 @@
 import { cn } from "./utils";
 import { type ReactNode, type ButtonHTMLAttributes } from "react";
 
-interface NavListItemProps
+interface SecondaryNavItemProps
   extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, "children"> {
   icon: ReactNode;
   label: string;
@@ -9,13 +9,13 @@ interface NavListItemProps
   className?: string;
 }
 
-export function NavListItem({
+export function SecondaryNavItem({
   icon,
   label,
   active = false,
   className,
   ...rest
-}: NavListItemProps) {
+}: SecondaryNavItemProps) {
   return (
     <button
       className={cn(

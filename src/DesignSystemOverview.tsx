@@ -28,8 +28,8 @@ import { Modal } from './AstraLibraryKit/components/modal'
 import { Tabs } from './AstraLibraryKit/components/tabs'
 import { Toolbar } from './AstraLibraryKit/components/toolbar'
 import { ToolbarItem } from './AstraLibraryKit/components/toolbar_item'
-import { NavList } from './AstraLibraryKit/components/nav_list'
-import { NavListItem } from './AstraLibraryKit/components/nav_list_item'
+import { SecondaryNav } from './AstraLibraryKit/components/secondary_nav'
+import { SecondaryNavItem } from './AstraLibraryKit/components/secondary_nav_item'
 import { VideoControl } from './AstraLibraryKit/components/video_control'
 import { Home, Film, Book, Folder, Settings, MousePointer, Search, Crop, Scissors, MessageCircle } from './AstraLibraryKit/components/icons'
 
@@ -1366,42 +1366,42 @@ export default function DesignSystemOverview() {
         </Section>
 
         <Section
-          id="nav-list-item"
-          title="Nav List Item"
-          description="Navigation item with icon and label. Active state uses brand-tertiary background with brand-primary text."
+          id="secondary-nav-item"
+          title="SecondaryNavItem"
+          description="Navigation item with icon and label for secondary navigation. Active state uses brand-tertiary background with brand-primary text."
           status="complete"
         >
           <ExampleRow label="Active">
             <div className="w-[223px]">
-              <NavListItem icon={<Home className="size-full" strokeWidth={1.5} />} label="Profile" active />
+              <SecondaryNavItem icon={<Home className="size-full" strokeWidth={1.5} />} label="Profile" active />
             </div>
           </ExampleRow>
           <ExampleRow label="Inactive">
             <div className="w-[223px]">
-              <NavListItem icon={<Film className="size-full" strokeWidth={1.5} />} label="Billing" />
+              <SecondaryNavItem icon={<Film className="size-full" strokeWidth={1.5} />} label="Billing" />
             </div>
           </ExampleRow>
           <ExampleRow label="Inactive (hover to preview)">
             <div className="w-[223px]">
-              <NavListItem icon={<Book className="size-full" strokeWidth={1.5} />} label="Notifications" />
+              <SecondaryNavItem icon={<Book className="size-full" strokeWidth={1.5} />} label="Notifications" />
             </div>
           </ExampleRow>
         </Section>
 
         <Section
-          id="nav-list"
-          title="Nav List"
-          description="Vertical navigation panel with heading and NavListItem children. Used for secondary navigation within settings or detail views."
+          id="secondary-nav"
+          title="SecondaryNav"
+          description="Vertical navigation panel with heading and SecondaryNavItem children. Used for secondary navigation within settings or detail views."
           status="complete"
         >
           <ExampleRow label="Settings example">
             <div className="h-[400px]">
-              <NavList title="Settings">
-                <NavListItem icon={<Home className="size-full" strokeWidth={1.5} />} label="Profile" active />
-                <NavListItem icon={<Film className="size-full" strokeWidth={1.5} />} label="Billing" />
-                <NavListItem icon={<Book className="size-full" strokeWidth={1.5} />} label="Notifications" />
-                <NavListItem icon={<Folder className="size-full" strokeWidth={1.5} />} label="Media" />
-              </NavList>
+              <SecondaryNav title="Settings">
+                <SecondaryNavItem icon={<Home className="size-full" strokeWidth={1.5} />} label="Profile" active />
+                <SecondaryNavItem icon={<Film className="size-full" strokeWidth={1.5} />} label="Billing" />
+                <SecondaryNavItem icon={<Book className="size-full" strokeWidth={1.5} />} label="Notifications" />
+                <SecondaryNavItem icon={<Folder className="size-full" strokeWidth={1.5} />} label="Media" />
+              </SecondaryNav>
             </div>
           </ExampleRow>
           <div className="mt-2 bg-bg-faint border border-border-secondary rounded-lg p-4 text-[12px] text-text-secondary">
