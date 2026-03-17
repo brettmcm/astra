@@ -29,7 +29,7 @@ export function ChatBubbles({ type = 'ai', text, userAvatar, className }: ChatBu
       <div className={cn("box-border content-stretch flex flex-col gap-[8px] items-start pl-0 pr-[32px] py-0 w-[254px]", className)}>
         <div className="content-stretch flex gap-[8px] items-start relative shrink-0">
           <div className="box-border content-stretch flex gap-[8px] items-start pl-[24px] pr-0 py-0 relative shrink-0 w-[254px]">
-            <div className="bg-background flex-[1_0_0] min-h-px min-w-px relative rounded-[8px] shrink-0">
+            <div className="bg-surface-bg flex-[1_0_0] min-h-px min-w-px relative rounded-[8px] shrink-0">
               <div aria-hidden="true" className="absolute border border-border-secondary border-solid inset-0 pointer-events-none rounded-[8px]" />
               <div className="size-full">
                 <div className="box-border content-stretch flex gap-[12px] items-start px-[16px] py-[12px] relative w-full">
