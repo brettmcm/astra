@@ -1,0 +1,108 @@
+# Tabs & SegmentedControl
+
+## Tabs
+
+### When to use
+
+Use Tabs for switching between content panels within a single section. Tabs are **tertiary navigation only** — used inside the main content area to switch views or filter content.
+
+```
+┌─ "Should I use Tabs?"
+│
+├─ Switching views within a single section?
+│  └─ Yes — Tabs (tertiary navigation)
+│
+├─ App-level page navigation?
+│  └─ No — use SidebarNavigation (primary)
+│
+├─ Page sub-sections (settings, detail views)?
+│  └─ No — use SecondaryNav (secondary)
+│
+└─ Inline icon switcher (compact)?
+   └─ No — use SegmentedControl
+```
+
+### Props
+
+| Prop | Type | Default |
+|---|---|---|
+| `tabs` | `{ id: string, label: string, content: ReactNode }[]` | required |
+| `defaultTab` | `string` | first tab |
+| `onChange` | `(tabId: string) => void` | — |
+| `className` | `string` | — |
+
+### Usage notes
+
+- Active tab uses `text-brand-primary` with a `brand-primary` underline indicator
+- Inactive tabs use `text-text-secondary` with hover to `text-text-primary`
+- Uses `role="tablist"`, `role="tab"` with `aria-selected`, and `role="tabpanel"` for accessibility
+- Tabs are passed as an array of `{ id, label, content }` objects — the component handles rendering
+
+### Example
+
+```tsx
+import { Tabs } from '@brettmcm/astraui'
+
+<Tabs
+  tabs={[
+    { id: 'details', label: 'Details', content: <DetailsPanel /> },
+    { id: 'export', label: 'Export', content: <ExportPanel /> },
+    { id: 'activity', label: 'Activity', content: <ActivityPanel /> },
+  ]}
+  defaultTab="details"
+  onChange={(tabId) => setActiveTab(tabId)}
+/>
+```
+
+### Rules
+
+IMPORTANT: Tabs are TERTIARY navigation only. Do NOT use Tabs for primary navigation (use SidebarNavigation) or secondary navigation (use SecondaryNav). If a page has sub-sections like Settings, those are SecondaryNavItems in a SecondaryNav, not Tabs.
+
+- Do not add icons inside Tabs — use text labels only
+- Tabs should be inside the main content area, not as standalone navigation
+
+---
+
+## SegmentedControl
+
+### When to use
+
+Use SegmentedControl for compact inline switching between modes or views using icon-only segments. Typically used in toolbars or compact UI areas.
+
+### Props
+
+| Prop | Type | Default |
+|---|---|---|
+| `segments` | `{ id: string, icon: ReactNode }[]` | required |
+| `selectedSegment` | `string` | required |
+| `onChange` | `(segmentId: string) => void` | required |
+
+### Usage notes
+
+- Icon-only segments — no text labels
+- Controlled component — parent manages `selectedSegment` state
+- Use `size={24}` on icons passed in the segments array
+
+### Example
+
+```tsx
+import { SegmentedControl } from '@brettmcm/astraui'
+import { Home, Film, Music, Image } from 'lucide-react'
+
+<SegmentedControl
+  segments={[
+    { id: 'home', icon: <Home size={24} /> },
+    { id: 'video', icon: <Film size={24} /> },
+    { id: 'audio', icon: <Music size={24} /> },
+    { id: 'image', icon: <Image size={24} /> },
+  ]}
+  selectedSegment={activeSegment}
+  onChange={(id) => setActiveSegment(id)}
+/>
+```
+
+### Rules
+
+- Use consistent icon sizes across all segments (all 24px)
+- SegmentedControl is for mode switching, not page navigation
+- Always provide a `selectedSegment` — it's a controlled component

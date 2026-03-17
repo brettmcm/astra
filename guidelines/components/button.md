@@ -1,0 +1,163 @@
+# Button
+
+## When to use
+
+Use Button for all interactive actions — form submissions, navigation triggers, and commands. Always use the `Button` component from `@brettmcm/astraui`, never a raw `<button>` element.
+
+## Variants
+
+| Variant | Frequency | Use for |
+|---|---|---|
+| `primary` | ~30% | Main CTA — one per visible section |
+| `neutral` | ~50% | **Default — most actions**, supporting actions alongside primary |
+| `subtle` | ~20% | Low-emphasis actions, text-like buttons |
+
+IMPORTANT: Valid variants are `"primary"`, `"neutral"`, `"subtle"` — nothing else. Do NOT use `"secondary"`, `"ghost"`, `"destructive"`, or `"link"`.
+
+## Variant decision tree
+
+```
+┌─ "What button variant should I use?"
+│
+├─ Main call-to-action (one per section)?
+│  └─ variant="primary"
+│
+├─ Supporting action alongside a primary?
+│  └─ variant="neutral" ⭐ Default
+│
+└─ Subtle or low-emphasis action?
+   └─ variant="subtle"
+```
+
+## Sizing
+
+| Size | Height | Usage |
+|---|---|---|
+| `medium` | Default | **Most cases** — standard actions |
+| `small` | Compact | Dense UI, inline actions, secondary controls |
+
+## Props
+
+| Prop | Type | Default |
+|---|---|---|
+| `variant` | `'primary' \| 'neutral' \| 'subtle'` | `'primary'` |
+| `size` | `'medium' \| 'small'` | `'medium'` |
+| `iconStart` | `ReactNode` | — |
+| `iconEnd` | `ReactNode` | — |
+| `disabled` | `boolean` | `false` |
+| `className` | `string` | — |
+
+Also accepts all native `<button>` HTML attributes.
+
+## Usage notes
+
+- Icons use `iconStart` and `iconEnd` props — NOT `leftIcon`, `rightIcon`, or `icon`
+- Use `size={16}` on icons passed to `iconStart`/`iconEnd`
+- Buttons are pill-shaped (`rounded-corner-full`)
+
+## Examples
+
+```tsx
+import { Button } from '@brettmcm/astraui'
+import { Plus, ArrowRight, Trash2 } from 'lucide-react'
+
+{/* Primary CTA */}
+<Button variant="primary">Save Changes</Button>
+
+{/* Neutral supporting action */}
+<Button variant="neutral">Cancel</Button>
+
+{/* With icons */}
+<Button variant="primary" iconStart={<Plus size={16} />}>Add Item</Button>
+<Button variant="subtle" iconEnd={<ArrowRight size={16} />}>Next</Button>
+
+{/* Small size */}
+<Button variant="neutral" size="small">Change Photo</Button>
+```
+
+---
+
+# ButtonGroup
+
+## When to use
+
+Use ButtonGroup to layout related actions together with consistent alignment.
+
+## Props
+
+| Prop | Type | Default |
+|---|---|---|
+| `children` | `ReactNode` | required |
+| `align` | `'justify' \| 'start' \| 'end' \| 'center' \| 'stack'` | `'justify'` |
+| `className` | `string` | — |
+
+## Alignment options
+
+| Align | Behavior |
+|---|---|
+| `justify` | Full-width, space-between with equal flex |
+| `start` | Horizontal, aligned left |
+| `end` | Horizontal, aligned right |
+| `center` | Horizontal, centered |
+| `stack` | Vertical with full-width buttons |
+
+## Example
+
+```tsx
+import { Button, ButtonGroup } from '@brettmcm/astraui'
+
+{/* Form footer — cancel + save */}
+<ButtonGroup align="end">
+  <Button variant="neutral">Cancel</Button>
+  <Button variant="primary">Save</Button>
+</ButtonGroup>
+
+{/* Full-width justified */}
+<ButtonGroup align="justify">
+  <Button variant="neutral">Back</Button>
+  <Button variant="primary">Continue</Button>
+</ButtonGroup>
+```
+
+---
+
+# FavoriteButton
+
+## When to use
+
+Use FavoriteButton for toggle favorite/star actions on content items. Typically overlays video thumbnails or appears alongside metadata.
+
+## Props
+
+| Prop | Type | Default |
+|---|---|---|
+| `defaultFavorited` | `boolean` | `false` |
+| `onChange` | `(favorited: boolean) => void` | — |
+| `className` | `string` | — |
+
+Also accepts all native `<button>` HTML attributes.
+
+## Usage notes
+
+- 24px circular toggle button
+- Uses `surface-bg` background that adapts to dark mode
+- Stroked `Star` icon when inactive, filled `brand-primary` star when favorited
+- Designed to overlay video thumbnails — works on both light and dark backgrounds
+
+## Example
+
+```tsx
+import { FavoriteButton } from '@brettmcm/astraui'
+
+<FavoriteButton defaultFavorited={false} onChange={(fav) => console.log(fav)} />
+```
+
+---
+
+## Rules
+
+- Only one `primary` button per visible section
+- All buttons in a group must use the same size variant — do not mix `medium` and `small`
+- Do not use variant names that don't exist — only `"primary"`, `"neutral"`, `"subtle"`
+- Primary action button goes on the right in button groups (Cancel left, Save right)
+- Use `iconStart`/`iconEnd` for icons — not children or other prop names
