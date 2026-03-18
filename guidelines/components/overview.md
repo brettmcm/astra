@@ -11,6 +11,7 @@ import { Button, Avatar, InputField } from '@brettmcm/astraui'
 | Component | Alt names | Purpose | Guidelines |
 |---|---|---|---|
 | Button | CTA, action button | Primary, neutral, subtle actions | [button.md](button.md) |
+| IconButton | Icon action, circle button | Icon-only circular action button | [button.md](button.md) |
 | ButtonGroup | Button bar, action group | Grouped related actions with alignment | [button.md](button.md) |
 | FavoriteButton | Like button, star button | Toggle favorite/star state | [button.md](button.md) |
 
@@ -25,7 +26,7 @@ import { Button, Avatar, InputField } from '@brettmcm/astraui'
 | Checkbox | Check, boolean input | Boolean selection with label/description | [input.md](input.md) |
 | RadioGroup | Radio buttons, single select | Mutually exclusive choices | [input.md](input.md) |
 | SwitchField | Toggle, switch | On/off toggle setting | [input.md](input.md) |
-| PromptInput | Chat input, message input | AI prompt text entry with send/attach | [chat.md](chat.md) |
+| PromptInput | Chat input, message input | AI prompt text entry with send/attach | [ai-agent.md](ai-agent.md) |
 
 ## Navigation
 
@@ -57,13 +58,14 @@ import { Button, Avatar, InputField } from '@brettmcm/astraui'
 | Tooltip | Hint, popover, info tip | Contextual hint on hover/focus | [feedback.md](feedback.md) |
 | Modal | Dialog, popup, overlay | Focused task dialog with backdrop | [modal.md](modal.md) |
 
-## Chat & AI
+## AI Agent
 
 | Component | Alt names | Purpose | Guidelines |
 |---|---|---|---|
-| ChatBubbles | Message, chat message | AI or user chat message bubble | [chat.md](chat.md) |
-| PromptInput | Chat input, message box | Text input with send/attach for AI prompts | [chat.md](chat.md) |
-| PromptPane | Chat panel, chat sidebar | Full chat container with messages + input | [chat.md](chat.md) |
+| AIVideoCreation | Video creator, new video prompt | Entry point for AI video generation with suggestion chips | [ai-agent.md](ai-agent.md) |
+| ChatBubbles | Message, chat message | AI or user chat message bubble | [ai-agent.md](ai-agent.md) |
+| PromptInput | Chat input, message box | Text input with send/attach for AI prompts | [ai-agent.md](ai-agent.md) |
+| PromptPane | Chat panel, chat sidebar | Full chat container with messages + input | [ai-agent.md](ai-agent.md) |
 
 ## Toolbar
 
@@ -76,8 +78,8 @@ import { Button, Avatar, InputField } from '@brettmcm/astraui'
 
 | Component | Alt names | Purpose | Guidelines |
 |---|---|---|---|
-| AstraLogo | Logo, brand mark | Brand mark SVG | — |
-| ThemeProvider | Theme wrapper, dark mode | App root provider for theme management | See `setup.md` |
+| AstraLogo | Logo, brand mark | Brand mark SVG | [navigation.md](navigation.md) |
+| ThemeProvider | Theme wrapper, dark mode | App root provider for theme management | [../foundations/modes.md](../foundations/modes.md) |
 
 ## Button variant decision tree
 
