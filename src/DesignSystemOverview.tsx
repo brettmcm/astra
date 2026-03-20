@@ -56,7 +56,7 @@ function Section({ id, title, description, children, status }: {
   return (
     <section id={id} className="scroll-mt-24">
       <div className="flex items-start justify-between gap-4 mb-1">
-        <h2 className="text-[20px] font-semibold text-foreground tracking-tight">{title}</h2>
+        <h2 className="text-[20px] font-semibold text-text-primary tracking-tight">{title}</h2>
         {status && (
           <span className={`shrink-0 text-[11px] font-medium px-2 py-0.5 rounded-full ${statusColors[status]}`}>
             {statusLabels[status]}
@@ -157,16 +157,16 @@ export default function DesignSystemOverview() {
   const [searchValue, setSearchValue] = useState('')
 
   return (
-    <div className="flex min-h-screen bg-background text-foreground">
+    <div className="flex min-h-screen bg-surface-bg text-text-primary">
       {/* Fixed sidebar nav */}
-      <nav className="fixed top-0 left-0 bottom-0 w-[220px] border-r border-border bg-background overflow-y-auto py-8 px-5 z-10">
+      <nav className="fixed top-0 left-0 bottom-0 w-[220px] border-r border-border-primary bg-surface-bg overflow-y-auto py-8 px-5 z-10">
         <div className="flex items-center justify-between mb-6">
           <div className="flex items-center gap-2">
             <svg width="24" height="24" viewBox="0 0 32 32" fill="none">
               <path d="M0 12.8C0 8.32 0 6.08.87 4.37A8 8 0 0 1 4.37.87C6.08 0 8.32 0 12.8 0h6.4c4.48 0 6.72 0 8.43.87a8 8 0 0 1 3.5 3.5C32 6.08 32 8.32 32 12.8v6.4c0 4.48 0 6.72-.87 8.43a8 8 0 0 1-3.5 3.5C25.92 32 23.68 32 19.2 32h-6.4c-4.48 0-6.72 0-8.43-.87a8 8 0 0 1-3.5-3.5C0 25.92 0 23.68 0 19.2V12.8Z" fill="var(--brand-primary)" />
               <path d="M16.35 4c1.01 7.28 4.37 10.64 11.65 11.65v.7c-7.28 1.01-10.64 4.37-11.65 11.65h-.7C14.64 20.72 11.28 17.36 4 16.35v-.7C11.28 14.64 14.64 11.28 15.65 4h.7Z" stroke="#fff" />
             </svg>
-            <span className="text-[15px] font-semibold text-foreground">Astra UI</span>
+            <span className="text-[15px] font-semibold text-text-primary">Astra UI</span>
           </div>
           <button
             onClick={toggleTheme}
@@ -201,7 +201,7 @@ export default function DesignSystemOverview() {
       <main className="ml-[220px] flex-1 max-w-[960px] px-10 py-10 flex flex-col gap-14">
         {/* Header */}
         <div>
-          <h1 className="text-[32px] font-semibold text-foreground tracking-tight leading-tight">Astra Design System</h1>
+          <h1 className="text-[32px] font-semibold text-text-primary tracking-tight leading-tight">Astra Design System</h1>
           <p className="text-[15px] text-text-secondary mt-2 max-w-[600px]">
             Component and token inventory for <span className="font-mono text-[13px] bg-brand-tertiary px-1.5 py-0.5 rounded">@brettmcm/astraui v0.1.1</span>. Use this overview to assess design system completeness and guide the authoring of usage guidelines.
           </p>

@@ -2,14 +2,7 @@
 
 ## Required CSS imports
 
-Styles are auto-imported when you import any component from `@brettmcm/astraui`. No additional CSS import is needed in most cases.
-
-```tsx
-import { Button, Avatar, Badge } from '@brettmcm/astraui'
-// Styles load automatically — no CSS import required
-```
-
-If styles aren't loading, explicitly import the stylesheet in your root `main.tsx`:
+Import the styles directly from the package into the main .css file to make them available globally
 
 ```tsx
 import '@brettmcm/astraui/styles.css'
